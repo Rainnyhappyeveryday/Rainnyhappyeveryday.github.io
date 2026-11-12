@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffffff">
+<meta name="robots" content="noindex, nofollow">
+<title>条条大路通罗马 · 三个方向</title>
+<style>
+  :root {
+    --paper: #ffffff;
+    --ink: #1f2e3a;
+    --muted: #72808c;
+    --faint: #9aa6b1;
+    --line: #dfe7ee;
+    --blue: #2f6285;
+    --sans: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Segoe UI", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { overflow-x: clip; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 1120px; margin: 0 auto; padding: 38px 24px 64px; }
+  .top { position: relative; border-top: 3px solid var(--blue); padding-top: 20px; }
+  h1 { margin: 0; font-size: 24px; font-weight: 700; letter-spacing: 0; line-height: 1.3; }
+  .back { position: absolute; top: 20px; right: 0; color: var(--blue); font-size: 10px; text-decoration: none; border-bottom: 1px solid #b7d0e0; }
+  .lede { max-width: 620px; margin: 7px 0 0; color: var(--muted); font-size: 12px; line-height: 1.8; }
+  .direction { padding: 30px 0 32px; border-bottom: 1px solid var(--line); }
+  .dir-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 12px; }
+  .dir-title { display: flex; align-items: baseline; gap: 10px; }
+  .dir-title b { color: var(--blue); font-family: var(--mono); font-size: 11px; font-weight: 600; }
+  .dir-title h2 { margin: 0; font-size: 18px; font-weight: 600; }
+  .dir-title span { color: var(--muted); font-size: 11px; }
+  .dir-head a { color: var(--blue); font-size: 10px; text-decoration: none; border-bottom: 1px solid #b7d0e0; }
+  .previews { display: flex; align-items: flex-start; gap: 22px; }
+  .desktop {
+    width: 700px; height: 438px; overflow: hidden;
+    border: 1px solid var(--line); background: #fff;
+  }
+  .desktop iframe {
+    width: 1440px; height: 900px; border: 0;
+    transform: scale(.4861); transform-origin: top left;
+  }
+  .phone {
+    width: 195px; height: 422px; overflow: hidden;
+    border: 1px solid var(--line); border-radius: 14px; background: #fff;
+  }
+  .phone iframe {
+    width: 390px; height: 844px; border: 0;
+    transform: scale(.5); transform-origin: top left;
+  }
+  .caption { margin-top: 7px; color: var(--faint); font-size: 9px; }
+  .footer { padding-top: 18px; color: var(--faint); font-size: 10px; }
+  @media (max-width: 920px) {
+    .page { padding: 24px 16px 44px; }
+    .top { padding-top: 14px; }
+    h1 { font-size: 21px; }
+    .direction { padding: 22px 0; }
+    .previews { gap: 12px; }
+    .desktop { width: calc(100% - 120px); height: auto; aspect-ratio: 1440 / 900; }
+    .desktop iframe { transform: scale(calc((100vw - 176px) / 1440)); }
+    .phone { width: 108px; height: 234px; border-radius: 10px; }
+    .phone iframe { transform: scale(.277); }
+    .dir-title h2 { font-size: 16px; }
+    .dir-title span { display: none; }
+  }
+  @media (max-width: 700px) {
+    .previews { justify-content: center; }
+    .previews > div:first-child { display: none; }
+    .phone { width: 195px; height: 422px; }
+    .phone iframe { transform: scale(.5); }
+    .back { top: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    <a class="back" href="index.html">返回主页面</a>
+    <h1>三个更柔和的方向</h1>
+    <p class="lede">同一份记录、同一组条件，只改变排布、字体气质和蓝色的用法。左边是桌面首屏，右边是手机首屏。点“打开完整首屏”可以单独看。</p>
+  </header>
+
+  <section class="direction">
+    <div class="dir-head">
+      <div class="dir-title"><b>A</b><h2>页边索引</h2><span>最安静，像一本按日期翻的薄册子</span></div>
+      <a href="directions/a.html" target="_blank" rel="noopener">打开完整首屏</a>
+    </div>
+    <div class="previews">
+      <div>
+        <div class="desktop"><iframe src="directions/a.html" title="A 桌面"></iframe></div>
+        <div class="caption">桌面 · 1440</div>
+      </div>
+      <div>
+        <div class="phone"><iframe src="directions/a.html" title="A 手机"></iframe></div>
+        <div class="caption">手机 · 390</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="direction">
+    <div class="dir-head">
+      <div class="dir-title"><b>B</b><h2>柔和卡片</h2><span>最容易扫读，适合在手机上快速看几条</span></div>
+      <a href="directions/b.html" target="_blank" rel="noopener">打开完整首屏</a>
+    </div>
+    <div class="previews">
+      <div>
+        <div class="desktop"><iframe src="directions/b.html" title="B 桌面"></iframe></div>
+        <div class="caption">桌面 · 1440</div>
+      </div>
+      <div>
+        <div class="phone"><iframe src="directions/b.html" title="B 手机"></iframe></div>
+        <div class="caption">手机 · 390</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="direction">
+    <div class="dir-head">
+      <div class="dir-title"><b>C</b><h2>安静桌面</h2><span>信息最集中，左边看列表，右边看一条的细节</span></div>
+      <a href="directions/c.html" target="_blank" rel="noopener">打开完整首屏</a>
+    </div>
+    <div class="previews">
+      <div>
+        <div class="desktop"><iframe src="directions/c.html" title="C 桌面"></iframe></div>
+        <div class="caption">桌面 · 1440</div>
+      </div>
+      <div>
+        <div class="phone"><iframe src="directions/c.html" title="C 手机"></iframe></div>
+        <div class="caption">手机 · 390</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">三个方向都使用同一份内容；首屏只展示前几条，完整页面会保留筛选和展开。</div>
+</div>
+</body>
+</html>
