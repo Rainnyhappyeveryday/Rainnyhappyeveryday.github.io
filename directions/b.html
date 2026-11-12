@@ -3,130 +3,232 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#ffffff">
-<title>条条大路通罗马 · 卡片</title>
+<meta name="theme-color" content="#eef3f8">
+<title>条条大路通罗马 · 信息板</title>
 <style>
   :root {
-    --paper: #ffffff;
-    --ink: #263440;
-    --muted: #72808c;
-    --faint: #9ba8b2;
-    --line: #dbe7f0;
-    --blue: #2f678e;
-    --soft: #edf5fb;
+    --ground: #eef3f8;
+    --surface: #ffffff;
+    --ink: #1d2c3a;
+    --muted: #6f7f8d;
+    --faint: #98a6b2;
+    --line: #dae5ee;
+    --blue: #2563a6;
+    --blue-deep: #1d4f83;
+    --blue-soft: #e8f1fa;
+    --amber: #a96617;
+    --amber-soft: #fbf0df;
+    --slate: #64748b;
+    --slate-soft: #edf1f5;
     --sans: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Segoe UI", Arial, sans-serif;
     --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    background: var(--paper);
+    background: var(--ground);
     color: var(--ink);
     font-family: var(--sans);
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
-  .page { max-width: 1120px; margin: 0 auto; padding: 40px 28px 64px; }
-  header { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
-  .rule { width: 30px; height: 3px; border-radius: 2px; background: var(--blue); margin-bottom: 14px; }
-  h1 { margin: 0; font-size: 24px; font-weight: 600; line-height: 1.3; letter-spacing: 0; }
-  header p { margin: 4px 0 0; color: var(--muted); font-size: 11px; }
-  .head-meta { text-align: right; color: var(--muted); font-size: 10.5px; line-height: 1.8; }
-  .head-meta b { color: var(--ink); font-weight: 500; }
-  .divider { margin: 24px 0 20px; border-top: 1px solid var(--line); }
-  .grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 16px; align-items: start; }
-  .lead {
-    padding: 24px 24px 22px;
-    border: 1px solid #cfe0ec;
-    border-radius: 16px;
-    background: var(--soft);
+  .page { max-width: 1160px; margin: 0 auto; padding: 26px 24px 56px; }
+  .board {
+    background: var(--surface);
+    border: 1px solid #e2eaf1;
+    border-radius: 18px;
+    padding: 18px 20px 20px;
   }
-  .kicker { color: var(--blue); font-size: 10px; letter-spacing: .02em; }
-  .date-big { margin-top: 8px; font-family: var(--mono); font-size: 34px; line-height: 1; letter-spacing: -.04em; }
-  .date-big small { margin-left: 7px; color: var(--muted); font-family: var(--sans); font-size: 10px; letter-spacing: 0; }
-  .lead .inst { margin-top: 18px; font-size: 14px; font-weight: 600; }
-  .lead .dir { margin-top: 3px; font-size: 20px; font-weight: 500; line-height: 1.35; }
-  .lead .sub { margin-top: 10px; color: var(--muted); font-size: 11px; }
-  .lead .sub span + span::before { content: " · "; color: var(--faint); }
-  .lead .mark { margin-top: 16px; color: var(--blue); font-family: var(--mono); font-size: 10px; font-weight: 600; }
-  .stack { display: grid; gap: 10px; }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+  .brand { display: flex; align-items: center; gap: 11px; }
+  .logo {
+    width: 36px; height: 36px; display: grid; place-items: center;
+    border-radius: 10px; background: var(--blue); color: #fff;
+    font-size: 16px; font-weight: 700;
+  }
+  h1 { margin: 0; font-size: 20px; font-weight: 700; line-height: 1.25; letter-spacing: 0; }
+  .brand p { margin: 1px 0 0; color: var(--muted); font-size: 10.5px; }
+  .head-meta { text-align: right; color: var(--muted); font-size: 10px; line-height: 1.7; white-space: nowrap; }
+  .head-meta b { color: var(--ink); font-weight: 500; }
+
+  .top-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 12px; margin-top: 14px; }
+  .summary {
+    position: relative;
+    overflow: hidden;
+    min-height: 150px;
+    padding: 20px 22px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #2b6ca8 0%, #1e4f83 100%);
+    color: #fff;
+  }
+  .summary::after {
+    content: "";
+    position: absolute;
+    width: 190px; height: 190px;
+    right: -52px; bottom: -92px;
+    border: 1px solid rgba(255,255,255,.22);
+    border-radius: 50%;
+  }
+  .summary .label { color: #c9dcf0; font-size: 10px; letter-spacing: .04em; }
+  .summary .big { display: flex; align-items: baseline; gap: 8px; margin-top: 8px; }
+  .summary .big b { font-family: var(--mono); font-size: 46px; font-weight: 500; line-height: 1; letter-spacing: -.05em; }
+  .summary .big span { color: #d7e6f5; font-size: 12px; }
+  .summary .sub { margin-top: 14px; color: #d7e6f5; font-size: 10.5px; }
+  .summary .stamp { margin-top: 2px; color: #a9c7e3; font-size: 9px; }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 13px 15px;
+  }
+  .stat-card .title { color: var(--muted); font-size: 10px; }
+  .stat-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 7px 0; border-bottom: 1px solid #edf2f6; }
+  .stat-row:last-child { border-bottom: 0; padding-bottom: 0; }
+  .stat-row .name { display: inline-flex; align-items: center; gap: 7px; color: #3e4f5e; font-size: 11px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+  .dot.a { background: var(--blue); }
+  .dot.b { background: var(--amber); }
+  .dot.c { background: var(--slate); }
+  .stat-row b { font-family: var(--mono); font-size: 14px; font-weight: 500; }
+
+  .section-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 20px 0 10px; }
+  .section-title { display: flex; align-items: center; gap: 9px; }
+  .num {
+    width: 20px; height: 20px; display: grid; place-items: center;
+    border-radius: 50%; background: var(--blue-soft); color: var(--blue);
+    font-family: var(--mono); font-size: 9px; font-weight: 600;
+  }
+  .section-title h2 { margin: 0; font-size: 15px; font-weight: 600; }
+  .legend { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: 9px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 2px 7px; border-radius: 999px; font-size: 9px; line-height: 1.7;
+    white-space: nowrap;
+  }
+  .chip.a { color: #1f5d94; background: var(--blue-soft); }
+  .chip.b { color: #8a5716; background: var(--amber-soft); }
+  .chip.c { color: #5d6b7a; background: var(--slate-soft); }
+
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .card {
-    padding: 14px 16px;
+    padding: 14px 15px 13px;
     border: 1px solid var(--line);
     border-radius: 12px;
-    background: #ffffff;
+    background: var(--surface);
   }
-  .card-top { display: flex; justify-content: space-between; gap: 10px; }
-  .card .date { color: var(--muted); font-family: var(--mono); font-size: 10px; }
-  .card .mark { color: var(--muted); font-family: var(--mono); font-size: 9px; font-weight: 600; }
-  .card .inst { margin-top: 3px; font-size: 12px; font-weight: 600; line-height: 1.45; }
-  .card .dir { margin-top: 1px; font-size: 12.5px; color: #344656; }
-  .card .sub { margin-top: 4px; color: var(--muted); font-size: 10px; }
-  .card .sub span + span::before { content: " · "; color: var(--faint); }
-  .foot { margin-top: 18px; color: var(--faint); font-size: 10px; }
+  .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+  .org-line { display: flex; align-items: center; gap: 9px; min-width: 0; }
+  .mono {
+    width: 34px; height: 34px; flex: 0 0 auto; display: grid; place-items: center;
+    border-radius: 9px; background: #edf4fa; color: #336a96;
+    font-size: 10px; font-weight: 600; letter-spacing: .02em;
+  }
+  .org { min-width: 0; }
+  .org .name { font-size: 12.5px; font-weight: 600; line-height: 1.45; }
+  .org .kind { margin-top: 1px; color: var(--muted); font-size: 9px; }
+  .dir { margin-top: 9px; font-size: 15px; font-weight: 600; line-height: 1.4; }
+  .meta { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+  .meta span { padding: 1px 6px; border-radius: 5px; background: #f1f5f9; color: #5b6b79; font-size: 9px; }
+  .card-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; padding-top: 8px; border-top: 1px solid #edf2f6; }
+  .date { color: var(--muted); font-family: var(--mono); font-size: 9px; }
+  .open { color: var(--blue); font-size: 9px; text-decoration: none; }
+  .foot { margin-top: 12px; color: var(--faint); font-size: 9px; }
+
   @media (max-width: 760px) {
-    .page { padding: 26px 18px 40px; }
-    header { display: block; }
-    .head-meta { display: flex; gap: 14px; margin-top: 12px; text-align: left; }
-    .grid { grid-template-columns: 1fr; }
-    .lead { border-radius: 14px; padding: 20px; }
-    .lead .dir { font-size: 18px; }
+    body { background: #f2f6fa; }
+    .page { padding: 12px 12px 32px; }
+    .board { border-radius: 14px; padding: 13px 13px 15px; }
+    header { align-items: flex-start; padding-bottom: 12px; }
+    h1 { font-size: 18px; }
+    .head-meta { display: none; }
+    .top-grid { grid-template-columns: 1fr; gap: 9px; margin-top: 11px; }
+    .summary { min-height: 132px; padding: 17px 18px; border-radius: 12px; }
+    .summary .big b { font-size: 40px; }
+    .stat-card { padding: 9px 13px; }
+    .stat-row { padding: 5px 0; }
+    .cards { grid-template-columns: 1fr; gap: 8px; }
+    .section-head { margin-top: 15px; }
   }
 </style>
 </head>
 <body>
 <div class="page">
-  <header>
-    <div>
-      <div class="rule"></div>
-      <h1>条条大路通罗马</h1>
-      <p>武汉 · 个人备忘</p>
+  <div class="board">
+    <header>
+      <div class="brand">
+        <div class="logo">江</div>
+        <div><h1>条条大路通罗马</h1><p>武汉 · 个人备忘</p></div>
+      </div>
+      <div class="head-meta">第 01 期 · 10.13—11.12<br><b>2026.11.12</b> 更新</div>
+    </header>
+
+    <div class="top-grid">
+      <section class="summary">
+        <div class="label">本期概览</div>
+        <div class="big"><b>11</b><span>条可看</span></div>
+        <div class="sub">18 条记录　·　17 条仍开放</div>
+        <div class="stamp">最近更新 2026.11.12</div>
+      </section>
+
+      <aside class="stat-card">
+        <div class="title">浏览顺序</div>
+        <div class="stat-row"><span class="name"><i class="dot a"></i>A · 先看</span><b>3</b></div>
+        <div class="stat-row"><span class="name"><i class="dot b"></i>B · 可看</span><b>8</b></div>
+        <div class="stat-row"><span class="name"><i class="dot c"></i>C · 暂存</span><b>7</b></div>
+      </aside>
     </div>
-    <div class="head-meta">第 01 期 · 10.13—11.12<br><b>11</b> 条可看　<b>18</b> 条记录</div>
-  </header>
 
-  <div class="divider"></div>
+    <div class="section-head">
+      <div class="section-title"><span class="num">01</span><h2>近期记录</h2></div>
+      <div class="legend"><span class="chip a">A</span><span class="chip b">B</span><span class="chip c">C</span></div>
+    </div>
 
-  <div class="grid">
-    <article class="lead">
-      <div class="kicker">最近一条</div>
-      <div class="date-big">11.10<small>周二</small></div>
-      <div class="inst">武汉理工大学</div>
-      <div class="dir">综合办秘书</div>
-      <div class="sub"><span>高校</span><span>合同</span><span>1 人</span><span>11.18 截止</span></div>
-      <div class="mark">A · 先看</div>
-    </article>
-
-    <div class="stack">
+    <div class="cards">
       <article class="card">
-        <div class="card-top"><span class="date">11.05 周四</span><span class="mark">A</span></div>
-        <div class="inst">华中农业大学</div>
+        <div class="card-top">
+          <div class="org-line"><div class="mono">武理</div><div class="org"><div class="name">武汉理工大学</div><div class="kind">高校 · 综合行政</div></div></div>
+          <span class="chip a">A</span>
+        </div>
+        <div class="dir">综合办秘书</div>
+        <div class="meta"><span>合同</span><span>1 人</span><span>11.18 截止</span></div>
+        <div class="card-foot"><span class="date">11.10 开始</span><a class="open" href="#">打开</a></div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <div class="org-line"><div class="mono">华农</div><div class="org"><div class="name">华中农业大学</div><div class="kind">高校 · 科研支持</div></div></div>
+          <span class="chip a">A</span>
+        </div>
         <div class="dir">实验室秘书</div>
-        <div class="sub"><span>高校</span><span>派遣</span><span>11.20 截止</span></div>
+        <div class="meta"><span>派遣</span><span>1 人</span><span>11.20 截止</span></div>
+        <div class="card-foot"><span class="date">11.05 开始</span><a class="open" href="#">打开</a></div>
       </article>
+
       <article class="card">
-        <div class="card-top"><span class="date">11.09 周一</span><span class="mark">B</span></div>
-        <div class="inst">武汉学院</div>
+        <div class="card-top">
+          <div class="org-line"><div class="mono">武院</div><div class="org"><div class="name">武汉学院</div><div class="kind">高校 · 校办</div></div></div>
+          <span class="chip b">B</span>
+        </div>
         <div class="dir">综合文秘</div>
-        <div class="sub"><span>高校</span><span>未注明</span><span>11.16 截止</span></div>
+        <div class="meta"><span>未注明</span><span>1 人</span><span>11.16 截止</span></div>
+        <div class="card-foot"><span class="date">11.09 开始</span><a class="open" href="#">打开</a></div>
       </article>
+
       <article class="card">
-        <div class="card-top"><span class="date">11.04 周三</span><span class="mark">B</span></div>
-        <div class="inst">湖北长江产业现代化工有限公司</div>
+        <div class="card-top">
+          <div class="org-line"><div class="mono">长化</div><div class="org"><div class="name">湖北长江产业现代化工</div><div class="kind">企业 · 武汉</div></div></div>
+          <span class="chip b">B</span>
+        </div>
         <div class="dir">国际业务销售</div>
-        <div class="sub"><span>企业</span><span>2 人</span><span>11.15 截止</span></div>
-      </article>
-      <article class="card">
-        <div class="card-top"><span class="date">10.28 周三</span><span class="mark">B</span></div>
-        <div class="inst">武汉设计工程学院</div>
-        <div class="dir">思想政治辅导员</div>
-        <div class="sub"><span>高校</span><span>合同</span><span>滚动</span></div>
+        <div class="meta"><span>企业</span><span>2 人</span><span>11.15 截止</span></div>
+        <div class="card-foot"><span class="date">11.04 开始</span><a class="open" href="#">打开</a></div>
       </article>
     </div>
-  </div>
 
-  <div class="foot">共 18 条记录，页面只展示首屏。</div>
+    <div class="foot">共 18 条记录，页面只展示首屏。</div>
+  </div>
 </div>
 </body>
 </html>
