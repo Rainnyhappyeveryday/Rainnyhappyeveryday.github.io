@@ -27,6 +27,7 @@
     --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
   }
   * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
   html, body { overflow-x: clip; }
   body {
     margin: 0;
@@ -168,6 +169,27 @@
   .card-tools { display: flex; align-items: center; gap: 10px; }
   .filter-toggle { display: none; }
 
+  .tabs { display: flex; align-items: center; gap: 22px; padding: 0 16px; border-bottom: 1px solid var(--line); overflow-x: auto; }
+  .tab {
+    position: relative; height: 40px; padding: 0; border: 0; background: transparent;
+    color: var(--text-2); font-size: 13px; white-space: nowrap;
+  }
+  .tab::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: transparent; }
+  .tab:hover { color: var(--primary); }
+  .tab.active { color: var(--primary); font-weight: 500; }
+  .tab.active::after { background: var(--primary); }
+  .tab em { margin-left: 4px; color: var(--muted); font-style: normal; font-size: 11px; }
+
+  .star-btn {
+    width: 26px; height: 26px; display: inline-grid; place-items: center;
+    border: 0; background: transparent; border-radius: 4px;
+    color: #bfbfbf; font-size: 16px; line-height: 1;
+  }
+  .star-btn:hover { background: #fffbe6; color: #faad14; }
+  .star-btn.on { color: #faad14; }
+  .tag-hidden { color: #8c8c8c; background: #fafafa; border-color: #d9d9d9; }
+  tbody tr.is-hidden { opacity: .6; }
+
   .filters { padding: 14px 16px; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px 16px; align-items: end; }
   .field { min-width: 0; }
   .field label { display: block; margin-bottom: 4px; color: var(--text-2); font-size: 12px; }
@@ -200,15 +222,16 @@
   tbody td:first-child { padding-left: 16px; }
   tbody td:last-child { padding-right: 16px; text-align: right; }
   tbody tr:hover { background: #fafcff; }
-  .col-org { width: 23%; }
-  .col-dir { width: 20%; }
-  .col-type { width: 7%; }
-  .col-way { width: 9%; }
+  .col-org { width: 22%; }
+  .col-dir { width: 17%; }
+  .col-type { width: 6%; }
+  .col-way { width: 8%; }
   .col-start { width: 8%; }
   .col-num { width: 6%; }
-  .col-end { width: 9%; }
-  .col-rel { width: 7%; }
-  .col-op { width: 11%; }
+  .col-end { width: 8%; }
+  .col-rel { width: 6%; }
+  .col-fav { width: 5%; text-align: center !important; }
+  .col-op { width: 14%; }
   .op-links { display: flex; align-items: center; justify-content: flex-end; gap: 9px; }
   .link-external { color: var(--text-2); }
   .link-external:hover { color: var(--primary); }
@@ -252,10 +275,14 @@
   .m-sub { margin-top: 1px; color: var(--muted); font-size: 10px; }
   .m-dir { margin-top: 8px; font-size: 13px; }
   .m-meta { display: flex; flex-wrap: wrap; gap: 4px 10px; margin-top: 5px; color: var(--text-2); font-size: 10px; }
-  .m-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 9px; }
+  .m-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 9px; }
   .m-foot .date { font-size: 10px; }
-  .m-actions { display: flex; align-items: center; gap: 12px; }
-  .m-actions a { color: var(--text-2); font-size: 11px; text-decoration: none; }
+  .m-actions { display: flex; align-items: center; gap: 9px; }
+  .m-actions a, .m-actions button { border: 0; background: transparent; padding: 0; color: var(--text-2); font-size: 10.5px; text-decoration: none; }
+  .m-actions .m-open { color: var(--primary); }
+  .m-tags { display: flex; align-items: center; gap: 3px; flex: 0 0 auto; }
+  .m-star { width: 24px; height: 24px; border: 0; background: none; color: #bfbfbf; font-size: 15px; padding: 0; }
+  .m-star.on { color: #faad14; }
   .m-open { padding: 0; border: 0; background: transparent; color: var(--primary); font-size: 11px; }
 
   /* ---------- drawer ---------- */
@@ -295,8 +322,24 @@
   .desc div { padding: 8px 10px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .desc dt { color: var(--muted); font-size: 10px; }
   .desc dd { margin: 2px 0 0; color: var(--text); font-size: 12px; line-height: 1.6; }
-  .drawer-foot { padding: 14px 20px; border-top: 1px solid var(--line); display: flex; justify-content: flex-end; }
+  .drawer-foot { padding: 12px 20px; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
   .drawer-foot a { text-decoration: none; }
+  .danger-link { border: 0; background: transparent; color: #cf1322; font-size: 12px; padding: 0; }
+  .danger-link:hover { text-decoration: underline; text-underline-offset: 2px; }
+  .restore-link { color: var(--primary); }
+  .drawer-star { margin-left: 2px; }
+
+  .toast {
+    position: fixed; left: 50%; bottom: 26px; z-index: 110;
+    transform: translate(-50%, 12px);
+    display: flex; align-items: center; gap: 14px;
+    padding: 9px 14px; border: 1px solid var(--line); border-radius: 6px;
+    background: #fff; box-shadow: 0 4px 16px rgba(0,0,0,.12);
+    color: var(--text); font-size: 12px;
+    opacity: 0; visibility: hidden; transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+  }
+  .toast.show { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+  .toast button { border: 0; background: transparent; color: var(--primary); font-size: 12px; padding: 0; }
 
   /* ---------- dialogs ---------- */
   dialog { width: min(720px, calc(100vw - 32px)); max-height: 82vh; padding: 0; border: 1px solid var(--border); background: #fff; color: var(--text); }
@@ -450,6 +493,12 @@
           </div>
         </div>
 
+        <div class="tabs" role="tablist" aria-label="视图">
+          <button class="tab active" type="button" role="tab" data-tab="all">全部<em id="tab-all">11</em></button>
+          <button class="tab" type="button" role="tab" data-tab="fav">收藏<em id="tab-fav">0</em></button>
+          <button class="tab" type="button" role="tab" data-tab="hidden">已隐藏<em id="tab-hidden">0</em></button>
+        </div>
+
         <div class="filters">
           <div class="field field-search">
             <label for="search-input">搜索</label>
@@ -508,6 +557,7 @@
                 <th class="col-num">人数</th>
                 <th class="col-end">截止</th>
                 <th class="col-rel">相关</th>
+                <th class="col-fav">收藏</th>
                 <th class="col-op">操作</th>
               </tr>
             </thead>
@@ -531,12 +581,22 @@
   <div class="drawer-head">
     <div><h2>记录详情</h2><p>公开信息备忘</p></div>
     <div class="drawer-head-actions">
+      <button class="star-btn drawer-star" id="drawer-fav" type="button" aria-label="收藏">☆</button>
       <a class="btn btn-primary btn-sm" id="drawer-link" href="#" target="_blank" rel="noopener noreferrer">查看原文 ↗</a>
       <button class="drawer-close" id="drawer-close" type="button" aria-label="关闭">×</button>
     </div>
   </div>
   <div class="drawer-body" id="drawer-body"></div>
+  <div class="drawer-foot">
+    <button class="danger-link" id="drawer-hide" type="button">不感兴趣，隐藏</button>
+    <button class="btn btn-sm" id="drawer-close2" type="button">关闭</button>
+  </div>
 </aside>
+
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <span id="toast-text"></span>
+  <button id="toast-undo" type="button">撤销</button>
+</div>
 
 <dialog id="method-dialog" aria-labelledby="method-title">
   <div class="dialog-head">
@@ -613,6 +673,26 @@
   var WEEKDAYS = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
   var DATE_MIN = DATA.meta.period_start || "2026-01-01";
   var DATE_MAX = DATA.meta.period_end || "2026-12-31";
+  var FAV_KEY = "ttdltlm.favorites.v1";
+  var HIDDEN_KEY = "ttdltlm.hidden.v1";
+
+  function loadSet(key) {
+    try {
+      var raw = localStorage.getItem(key);
+      var arr = raw ? JSON.parse(raw) : [];
+      return new Set(Array.isArray(arr) ? arr : []);
+    } catch (e) {
+      return new Set();
+    }
+  }
+  function saveSet(key, set) {
+    try { localStorage.setItem(key, JSON.stringify(Array.from(set))); } catch (e) {}
+  }
+
+  var favorites = loadSet(FAV_KEY);
+  var hidden = loadSet(HIDDEN_KEY);
+  var lastHiddenId = null;
+  var toastTimer = null;
 
   var state = {
     q: "",
@@ -624,6 +704,7 @@
     openOnly: true,
     showC: false,
     sort: "publish_desc",
+    view: "all",
     page: 1,
     pageSize: 10
   };
@@ -644,10 +725,19 @@
     pageCount: document.getElementById("page-count"),
     pagination: document.getElementById("pagination"),
     filters: document.querySelector(".filters"),
+    tabs: document.querySelectorAll("[data-tab]"),
+    tabAll: document.getElementById("tab-all"),
+    tabFav: document.getElementById("tab-fav"),
+    tabHidden: document.getElementById("tab-hidden"),
     drawer: document.getElementById("drawer"),
     overlay: document.getElementById("overlay"),
     drawerBody: document.getElementById("drawer-body"),
-    drawerLink: document.getElementById("drawer-link")
+    drawerLink: document.getElementById("drawer-link"),
+    drawerFav: document.getElementById("drawer-fav"),
+    drawerHide: document.getElementById("drawer-hide"),
+    toast: document.getElementById("toast"),
+    toastText: document.getElementById("toast-text"),
+    toastUndo: document.getElementById("toast-undo")
   };
 
   function pad(n) { return String(n).padStart(2, "0"); }
@@ -743,8 +833,17 @@
   }
 
   function matches(job) {
-    if (state.openOnly && !isOpen(job)) return false;
-    if (!state.showC && job.fit === "C") return false;
+    var isHidden = hidden.has(job.id);
+    if (state.view === "hidden") {
+      if (!isHidden) return false;
+    } else {
+      if (isHidden) return false;
+      if (state.view === "fav" && !favorites.has(job.id)) return false;
+    }
+    if (state.view === "all") {
+      if (state.openOnly && !isOpen(job)) return false;
+      if (!state.showC && job.fit === "C") return false;
+    }
     if (state.type !== "all" && job.type !== state.type) return false;
     if (state.source !== "all" && job.source !== state.source) return false;
     if (state.employment !== "all" && job.employment !== state.employment) return false;
@@ -770,7 +869,9 @@
   }
 
   function rowHtml(job) {
-    return '<tr data-id="' + esc(job.id) + '">' +
+    var isFav = favorites.has(job.id);
+    var isHid = hidden.has(job.id);
+    return '<tr class="' + (isHid ? "is-hidden" : "") + '" data-id="' + esc(job.id) + '">' +
       '<td><div class="org">' + esc(job.unit) + '</div><div class="org-sub">' + esc(job.unit_detail) + '</div></td>' +
       '<td><div class="dir">' + esc(job.position) + '</div></td>' +
       '<td><span class="muted">' + esc(typeLabel(job.type)) + '</span></td>' +
@@ -778,17 +879,20 @@
       '<td><span class="date">' + fmtMD(job.start_date) + '</span></td>' +
       '<td><span class="muted">' + esc(job.headcount_label || (job.headcount + " 人")) + '</span></td>' +
       '<td><span class="tag ' + deadlineClass(job) + '">' + esc(deadlineText(job)) + '</span></td>' +
-      '<td><span class="tag ' + fitClass(job.fit) + '">' + esc(job.fit) + '</span></td>' +
-      '<td><div class="op-links"><button class="link-btn" type="button" data-view="' + esc(job.id) + '">查看</button><a class="link-btn link-external" href="' + esc(job.announcement_url) + '" target="_blank" rel="noopener noreferrer">原文</a></div></td>' +
+      '<td><span class="tag ' + fitClass(job.fit) + '">' + esc(job.fit) + '</span>' + (isHid ? ' <span class="tag tag-hidden">已隐藏</span>' : '') + '</td>' +
+      '<td><button class="star-btn' + (isFav ? " on" : "") + '" type="button" data-fav="' + esc(job.id) + '" aria-pressed="' + isFav + '" aria-label="' + (isFav ? "取消收藏" : "收藏") + '" title="' + (isFav ? "取消收藏" : "收藏") + '">' + (isFav ? "★" : "☆") + '</button></td>' +
+      '<td><div class="op-links"><button class="link-btn" type="button" data-view="' + esc(job.id) + '">查看</button><a class="link-btn link-external" href="' + esc(job.announcement_url) + '" target="_blank" rel="noopener noreferrer">原文</a>' + (isHid ? '<button class="link-btn" type="button" data-unhide="' + esc(job.id) + '">恢复</button>' : '<button class="link-btn" type="button" data-hide="' + esc(job.id) + '">隐藏</button>') + '</div></td>' +
     '</tr>';
   }
 
   function mobileHtml(job) {
-    return '<article class="m-card">' +
-      '<div class="m-top"><div><div class="m-org">' + esc(job.unit) + '</div><div class="m-sub">' + esc(job.unit_detail) + '</div></div><span class="tag ' + fitClass(job.fit) + '">' + esc(job.fit) + '</span></div>' +
+    var isFav = favorites.has(job.id);
+    var isHid = hidden.has(job.id);
+    return '<article class="m-card' + (isHid ? " is-hidden" : "") + '">' +
+      '<div class="m-top"><div><div class="m-org">' + esc(job.unit) + '</div><div class="m-sub">' + esc(job.unit_detail) + '</div></div><div class="m-tags"><button class="m-star' + (isFav ? " on" : "") + '" type="button" data-fav="' + esc(job.id) + '" aria-label="' + (isFav ? "取消收藏" : "收藏") + '">' + (isFav ? "★" : "☆") + '</button><span class="tag ' + fitClass(job.fit) + '">' + esc(job.fit) + '</span></div></div>' +
       '<div class="m-dir">' + esc(job.position) + '</div>' +
-      '<div class="m-meta"><span>' + esc(typeLabel(job.type)) + '</span><span>' + esc(empLabel(job.employment)) + '</span><span>' + esc(job.headcount_label || (job.headcount + " 人")) + '</span><span>' + esc(deadlineText(job)) + ' 截止</span></div>' +
-      '<div class="m-foot"><span class="date">' + fmtMD(job.start_date) + ' 开始</span><div class="m-actions"><a href="' + esc(job.announcement_url) + '" target="_blank" rel="noopener noreferrer">原文</a><button class="m-open" type="button" data-view="' + esc(job.id) + '">查看详情</button></div></div>' +
+      '<div class="m-meta"><span>' + esc(typeLabel(job.type)) + '</span><span>' + esc(empLabel(job.employment)) + '</span><span>' + esc(job.headcount_label || (job.headcount + " 人")) + '</span><span>' + esc(deadlineText(job)) + ' 截止</span>' + (isHid ? '<span>已隐藏</span>' : '') + '</div>' +
+      '<div class="m-foot"><span class="date">' + fmtMD(job.start_date) + ' 开始</span><div class="m-actions"><a href="' + esc(job.announcement_url) + '" target="_blank" rel="noopener noreferrer">原文</a>' + (isHid ? '<button type="button" data-unhide="' + esc(job.id) + '">恢复</button>' : '<button type="button" data-hide="' + esc(job.id) + '">隐藏</button>') + '<button class="m-open" type="button" data-view="' + esc(job.id) + '">查看详情</button></div></div>' +
     '</article>';
   }
 
@@ -803,6 +907,20 @@
     els.pagination.innerHTML = html;
   }
 
+  function renderTabs() {
+    var visible = JOBS.filter(function (j) { return !hidden.has(j.id); }).length;
+    var favCount = JOBS.filter(function (j) { return favorites.has(j.id) && !hidden.has(j.id); }).length;
+    var hiddenCount = JOBS.filter(function (j) { return hidden.has(j.id); }).length;
+    els.tabAll.textContent = visible;
+    els.tabFav.textContent = favCount;
+    els.tabHidden.textContent = hiddenCount;
+    els.tabs.forEach(function (tab) {
+      var active = tab.getAttribute("data-tab") === state.view;
+      tab.classList.toggle("active", active);
+      tab.setAttribute("aria-selected", active ? "true" : "false");
+    });
+  }
+
   function render() {
     var all = sortedFiltered();
     var total = all.length;
@@ -810,12 +928,14 @@
     if (state.page > pages) state.page = pages;
     var start = (state.page - 1) * state.pageSize;
     var page = all.slice(start, start + state.pageSize);
+    var empty = state.view === "fav" ? "还没有收藏。点列表里的星标，把想再看的内容留在这里。" : state.view === "hidden" ? "没有隐藏的记录。" : "没有符合条件的记录，试试放宽筛选条件。";
 
-    els.body.innerHTML = page.length ? page.map(rowHtml).join("") : '<tr><td colspan="9"><div class="empty">没有符合条件的记录，试试放宽筛选条件。</div></td></tr>';
-    els.mobile.innerHTML = page.length ? page.map(mobileHtml).join("") : '<div class="empty">没有符合条件的记录。</div>';
-    var count = "共 " + total + " 条" + (state.openOnly ? " · 只看仍开放" : "") + (!state.showC ? " · 暂存已隐藏" : "");
+    els.body.innerHTML = page.length ? page.map(rowHtml).join("") : '<tr><td colspan="10"><div class="empty">' + empty + '</div></td></tr>';
+    els.mobile.innerHTML = page.length ? page.map(mobileHtml).join("") : '<div class="empty">' + empty + '</div>';
+    var count = state.view === "fav" ? "收藏 " + total + " 条" : state.view === "hidden" ? "已隐藏 " + total + " 条" : "共 " + total + " 条" + (state.openOnly ? " · 只看仍开放" : "") + (!state.showC ? " · 暂存已隐藏" : "");
     els.count.textContent = count;
     els.pageCount.textContent = "第 " + state.page + " / " + pages + " 页，共 " + total + " 条";
+    renderTabs();
     renderPagination(total);
   }
 
@@ -838,6 +958,59 @@
     state.dateFrom = DATE_MIN; state.dateTo = DATE_MAX;
     state.openOnly = true; state.showC = false; state.sort = "publish_desc"; state.page = 1;
     renderAll();
+  }
+
+  function showToast(text, canUndo) {
+    clearTimeout(toastTimer);
+    els.toastText.textContent = text;
+    els.toastUndo.hidden = !canUndo;
+    els.toast.classList.add("show");
+    toastTimer = setTimeout(function () { els.toast.classList.remove("show"); }, 5000);
+  }
+
+  function setView(view) {
+    state.view = view;
+    state.page = 1;
+    closeDrawer();
+    render();
+  }
+
+  function toggleFav(id) {
+    if (favorites.has(id)) favorites.delete(id); else favorites.add(id);
+    saveSet(FAV_KEY, favorites);
+    render();
+    if (document.getElementById("drawer").classList.contains("show")) {
+      var job = JOBS.filter(function (j) { return j.id === id; })[0];
+      if (job) updateDrawerFav(job);
+    }
+  }
+
+  function hideJob(id) {
+    hidden.add(id);
+    saveSet(HIDDEN_KEY, hidden);
+    lastHiddenId = id;
+    closeDrawer();
+    render();
+    showToast("已隐藏，列表里不再显示", true);
+  }
+
+  function unhideJob(id) {
+    hidden.delete(id);
+    saveSet(HIDDEN_KEY, hidden);
+    lastHiddenId = null;
+    closeDrawer();
+    render();
+    showToast("已恢复显示", false);
+  }
+
+  function updateDrawerFav(job) {
+    var fav = favorites.has(job.id);
+    els.drawerFav.textContent = fav ? "★" : "☆";
+    els.drawerFav.classList.toggle("on", fav);
+    els.drawerFav.setAttribute("aria-label", fav ? "取消收藏" : "收藏");
+    var isHid = hidden.has(job.id);
+    els.drawerHide.textContent = isHid ? "恢复显示" : "不感兴趣，隐藏";
+    els.drawerHide.className = isHid ? "danger-link restore-link" : "danger-link";
   }
 
   function openDrawer(id) {
@@ -869,6 +1042,8 @@
       '<div class="drawer-section"><h3>相关判断</h3><p>' + esc(job.fit_reason) + '</p></div>' +
       group;
     els.drawerLink.href = job.announcement_url;
+    els.drawer.dataset.id = job.id;
+    updateDrawerFav(job);
     els.drawer.classList.add("show");
     els.overlay.classList.add("show");
     els.drawer.setAttribute("aria-hidden", "false");
@@ -947,6 +1122,14 @@
     document.getElementById("print-btn").addEventListener("click", function () { window.print(); });
 
     document.addEventListener("click", function (e) {
+      var tab = e.target.closest("[data-tab]");
+      if (tab) { setView(tab.getAttribute("data-tab")); return; }
+      var fav = e.target.closest("[data-fav]");
+      if (fav) { toggleFav(fav.getAttribute("data-fav")); return; }
+      var hide = e.target.closest("[data-hide]");
+      if (hide) { hideJob(hide.getAttribute("data-hide")); return; }
+      var unhide = e.target.closest("[data-unhide]");
+      if (unhide) { unhideJob(unhide.getAttribute("data-unhide")); return; }
       var view = e.target.closest("[data-view]");
       if (view) { openDrawer(view.getAttribute("data-view")); return; }
       var page = e.target.closest("[data-page]");
@@ -954,7 +1137,23 @@
     });
     els.overlay.addEventListener("click", closeDrawer);
     document.getElementById("drawer-close").addEventListener("click", closeDrawer);
+    document.getElementById("drawer-close2").addEventListener("click", closeDrawer);
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeDrawer(); });
+
+    els.drawerFav.addEventListener("click", function () {
+      var id = els.drawer.dataset.id;
+      if (id) toggleFav(id);
+    });
+    els.drawerHide.addEventListener("click", function () {
+      var id = els.drawer.dataset.id;
+      if (!id) return;
+      if (hidden.has(id)) unhideJob(id); else hideJob(id);
+    });
+    els.toastUndo.addEventListener("click", function () {
+      if (lastHiddenId) unhideJob(lastHiddenId);
+      lastHiddenId = null;
+      els.toast.classList.remove("show");
+    });
 
     var dialog = document.getElementById("method-dialog");
     function openMethod() { if (typeof dialog.showModal === "function") dialog.showModal(); else dialog.setAttribute("open", ""); }
