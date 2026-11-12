@@ -3,32 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#1f5f99">
 <meta name="description" content="武汉高校、事业单位、国央企社会招聘周报；为中南财大国际商务硕士筛选，支持手机查看、筛选和导出。">
 <title>江城岗位雷达 · 武汉高校 / 事业单位 / 国央企 社会招聘周报</title>
 <style>
   :root {
     --paper: #ffffff;
     --surface: #ffffff;
-    --surface-2: #f7f7f5;
-    --ink: #18211b;
-    --muted: #6b7269;
-    --muted-2: #8c9188;
-    --line: #d8d2c4;
-    --line-strong: #b9b3a4;
-    --green: #1f5c42;
-    --green-soft: #e2ece3;
-    --green-deep: #123c2c;
-    --amber: #a45a1c;
-    --amber-soft: #f4e7d5;
-    --red: #9e382b;
-    --red-soft: #f3dfda;
-    --blue: #31506c;
-    --blue-soft: #e2e9ef;
-    --gray-soft: #e7e4dc;
-    --serif: "Songti SC", "STSong", "SimSun", "Noto Serif SC", serif;
-    --sans: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, -apple-system, sans-serif;
-    --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    --surface-2: #f3f7fc;
+    --ink: #152536;
+    --muted: #5f6f80;
+    --muted-2: #8494a6;
+    --line: #dbe4ee;
+    --line-strong: #b6c6d8;
+    --green: #1f5f99;
+    --green-soft: #e8f1fb;
+    --green-deep: #123a5c;
+    --amber: #8a5a18;
+    --amber-soft: #f7eedf;
+    --red: #b23a2f;
+    --red-soft: #f7e3e0;
+    --blue: #2c5d86;
+    --blue-soft: #e4eef7;
+    --gray-soft: #e8edf3;
+    --serif: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Segoe UI", Arial, sans-serif;
+    --sans: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Segoe UI", Arial, sans-serif;
+    --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
     --max: 1280px;
   }
 
@@ -83,7 +83,7 @@
     display: grid;
     place-items: center;
     background: var(--green-deep);
-    color: #f7f3e8;
+    color: #f7fafc;
     font-family: var(--serif);
     font-size: 20px;
     line-height: 1;
@@ -95,7 +95,7 @@
     font-family: var(--serif);
     font-size: 20px;
     font-weight: 700;
-    letter-spacing: .06em;
+    letter-spacing: .02em;
     line-height: 1.2;
   }
 
@@ -154,7 +154,7 @@
   .btn-dark {
     background: var(--green-deep);
     border-color: var(--green-deep);
-    color: #f7f3e8;
+    color: #f7fafc;
   }
 
   .btn-dark:hover {
@@ -399,7 +399,7 @@
   .chip.active {
     background: var(--green-deep);
     border-color: var(--green-deep);
-    color: #f7f3e8;
+    color: #f7fafc;
   }
 
   .quick {
@@ -472,7 +472,7 @@
 
   .switch input:checked::after {
     transform: translateX(12px);
-    background: #f7f3e8;
+    background: #f7fafc;
   }
 
   .filter-meta {
@@ -525,7 +525,7 @@
     font-family: var(--serif);
     font-size: 28px;
     font-weight: 700;
-    letter-spacing: -.02em;
+    letter-spacing: 0;
     line-height: 1.2;
   }
 
@@ -674,11 +674,11 @@
     border-radius: 2px;
   }
 
-  .type-pill.univ { color: var(--green); background: var(--green-soft); border-color: #c7d8ca; }
-  .type-pill.voc { color: #506447; background: #e7ecdf; border-color: #d0d8c5; }
-  .type-pill.soe { color: var(--amber); background: var(--amber-soft); border-color: #e4c9a7; }
-  .type-pill.pub { color: var(--blue); background: var(--blue-soft); border-color: #c6d3df; }
-  .type-pill.res { color: #5e4c6e; background: #ebe4ef; border-color: #d7cbe0; }
+  .type-pill.univ { color: #1f5f99; background: #e8f1fb; border-color: #c9ddf2; }
+  .type-pill.voc { color: #2b6470; background: #e4f1f3; border-color: #c5dde1; }
+  .type-pill.soe { color: #244e78; background: #e3edf8; border-color: #c5d8ec; }
+  .type-pill.pub { color: #2c5d86; background: #e4eef7; border-color: #c6d3df; }
+  .type-pill.res { color: #4e5580; background: #eaecf7; border-color: #d4d7e9; }
 
   .emp-text {
     display: inline-block;
@@ -751,8 +751,8 @@
     font-weight: 700;
   }
 
-  .fit-a { color: #f7f3e8; background: var(--green); border-color: var(--green); }
-  .fit-b { color: var(--amber); background: var(--amber-soft); border-color: #e4c9a7; }
+  .fit-a { color: #f7fafc; background: var(--green); border-color: var(--green); }
+  .fit-b { color: var(--green); background: var(--green-soft); border-color: #c9ddf2; }
   .fit-c { color: var(--muted); background: var(--gray-soft); border-color: var(--line); }
 
   .link-btn {
@@ -966,7 +966,7 @@
     font-family: var(--serif);
     font-size: 28px;
     line-height: 1.2;
-    letter-spacing: -.02em;
+    letter-spacing: 0;
   }
 
   .log-intro p {
@@ -1050,7 +1050,7 @@
     margin: 48px -28px -64px;
     padding: 34px 28px 40px;
     background: var(--green-deep);
-    color: #dfe6dc;
+    color: #dce7f2;
   }
 
   .footer-inner {
@@ -1063,24 +1063,24 @@
 
   .footer h3 {
     margin: 0 0 10px;
-    color: #f7f3e8;
+    color: #f7fafc;
     font-family: var(--serif);
     font-size: 18px;
-    letter-spacing: .02em;
+    letter-spacing: .01em;
   }
 
   .footer p {
     margin: 0;
-    color: #b9c8ba;
+    color: #b8c9da;
     font-size: 11px;
     line-height: 1.8;
   }
 
-  .footer b { color: #f7f3e8; font-weight: 600; }
+  .footer b { color: #f7fafc; font-weight: 600; }
 
   .footer .fine {
     margin-top: 12px;
-    color: #8fa691;
+    color: #8da6bd;
     font-size: 10px;
   }
 
@@ -1096,7 +1096,7 @@
     border-radius: 2px;
   }
 
-  dialog::backdrop { background: rgba(18, 29, 22, .45); }
+  dialog::backdrop { background: rgba(12, 26, 40, .45); }
 
   .dialog-head {
     display: flex;
@@ -1251,7 +1251,7 @@
     flex: 0 0 auto;
     padding: 1px 5px;
     background: var(--green);
-    color: #f7f3e8;
+    color: #f7fafc;
     font-family: var(--mono);
     font-size: 9px;
     line-height: 1.7;
