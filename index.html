@@ -3,46 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#1f5f99">
-<meta name="description" content="武汉高校、事业单位、国央企社会招聘周报；为中南财大国际商务硕士筛选，支持手机查看、筛选和导出。">
-<title>江城岗位雷达 · 武汉高校 / 事业单位 / 国央企 社会招聘周报</title>
+<meta name="theme-color" content="#245f8f">
+<meta name="description" content="条条大路通罗马：武汉高校、事业单位、企业公开信息备忘。">
+<title>条条大路通罗马</title>
 <style>
   :root {
-    --paper: #ffffff;
-    --surface: #ffffff;
-    --surface-2: #f3f7fc;
-    --ink: #152536;
-    --muted: #5f6f80;
-    --muted-2: #8494a6;
-    --line: #dbe4ee;
-    --line-strong: #b6c6d8;
-    --green: #1f5f99;
-    --green-soft: #e8f1fb;
-    --green-deep: #123a5c;
-    --amber: #8a5a18;
-    --amber-soft: #f7eedf;
-    --red: #b23a2f;
-    --red-soft: #f7e3e0;
-    --blue: #2c5d86;
-    --blue-soft: #e4eef7;
-    --gray-soft: #e8edf3;
-    --serif: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Segoe UI", Arial, sans-serif;
+    --bg: #ffffff;
+    --ink: #1b2733;
+    --muted: #637181;
+    --faint: #8a97a6;
+    --line: #dfe6ee;
+    --line-strong: #c8d4e0;
+    --blue: #245f8f;
+    --blue-deep: #173a56;
+    --blue-soft: #eaf2f9;
+    --red: #a84236;
     --sans: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Segoe UI", Arial, sans-serif;
     --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-    --max: 1280px;
+    --max: 1060px;
   }
 
   * { box-sizing: border-box; }
 
-  html { scroll-behavior: smooth; }
+  [hidden] { display: none !important; }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: clip;
+  }
 
   body {
     margin: 0;
-    background: var(--paper);
+    overflow-x: clip;
+    background: var(--bg);
     color: var(--ink);
     font-family: var(--sans);
-    font-size: 14px;
-    line-height: 1.6;
+    font-size: 13px;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -53,1151 +50,742 @@
 
   button { cursor: pointer; }
 
-  .page {
+  :focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+  }
+
+  .shell {
     max-width: var(--max);
     margin: 0 auto;
-    padding: 0 28px 64px;
+    padding: 0 24px 48px;
   }
 
-  /* ---------- top bar ---------- */
+  /* ---------- masthead ---------- */
 
-  .topbar {
+  .masthead {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
-    gap: 24px;
-    padding: 20px 0;
-    border-bottom: 1px solid var(--line-strong);
+    gap: 20px;
+    padding: 26px 0 18px;
+    border-bottom: 1px solid var(--line);
   }
 
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    min-width: 0;
-  }
-
-  .brand-mark {
-    width: 38px;
-    height: 38px;
-    display: grid;
-    place-items: center;
-    background: var(--green-deep);
-    color: #f7fafc;
-    font-family: var(--serif);
+  .wordmark h1 {
+    margin: 0;
     font-size: 20px;
-    line-height: 1;
-    border-radius: 2px;
-    flex: 0 0 auto;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: .01em;
   }
 
-  .brand-name {
-    font-family: var(--serif);
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: .02em;
-    line-height: 1.2;
-  }
-
-  .brand-sub {
-    margin-top: 2px;
+  .wordmark p {
+    margin: 3px 0 0;
     color: var(--muted);
-    font-size: 10px;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    white-space: nowrap;
+    font-size: 11px;
+    letter-spacing: .02em;
   }
 
-  .top-actions {
+  .mast-actions {
     display: flex;
     align-items: center;
     gap: 14px;
-    flex: 0 0 auto;
-  }
-
-  .issue-stamp {
-    text-align: right;
     color: var(--muted);
     font-size: 11px;
-    line-height: 1.5;
-    letter-spacing: .04em;
-  }
-
-  .issue-stamp b {
-    display: block;
-    color: var(--ink);
-    font-size: 12px;
-    letter-spacing: .08em;
-  }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    min-height: 34px;
-    padding: 7px 13px;
-    border: 1px solid var(--line-strong);
-    background: transparent;
-    color: var(--ink);
-    font-size: 12px;
-    letter-spacing: .03em;
-    border-radius: 2px;
-    transition: background .15s ease, border-color .15s ease, color .15s ease;
-  }
-
-  .btn:hover {
-    background: var(--surface-2);
-    border-color: var(--ink);
-  }
-
-  .btn-dark {
-    background: var(--green-deep);
-    border-color: var(--green-deep);
-    color: #f7fafc;
-  }
-
-  .btn-dark:hover {
-    background: var(--green);
-    border-color: var(--green);
-  }
-
-  .btn svg { width: 13px; height: 13px; flex: 0 0 auto; }
-
-  /* ---------- compact summary ---------- */
-
-  .summary-bar {
-    display: flex;
-    align-items: stretch;
-    border-bottom: 1px solid var(--line-strong);
-    min-height: 82px;
-  }
-
-  .summary-lead {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-width: 248px;
-    padding: 12px 24px 12px 0;
-    border-right: 1px solid var(--line);
-  }
-
-  .summary-eyebrow {
-    color: var(--green);
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: .14em;
-  }
-
-  .summary-lead strong {
-    margin-top: 4px;
-    font-family: var(--serif);
-    font-size: 17px;
-    font-weight: 700;
-    line-height: 1.3;
     white-space: nowrap;
   }
 
-  .summary-lead strong span {
-    margin-left: 7px;
+  .plain-btn {
+    padding: 0;
+    border: 0;
+    background: none;
     color: var(--muted);
-    font-family: var(--mono);
-    font-size: 9px;
-    font-weight: 400;
+    font-size: 11px;
+  }
+
+  .plain-btn:hover { color: var(--ink); }
+
+  /* ---------- overview ---------- */
+
+  .overview {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px 24px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .overview-period {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .overview-period b {
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 12px;
+  }
+
+  .overview-stats {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 18px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+
+  .overview-stats b {
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 10px;
     letter-spacing: .02em;
   }
 
-  .summary-stats {
-    display: flex;
-    flex: 1;
-    min-width: 0;
-  }
-
-  .summary-stats > div {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    justify-content: center;
-    min-width: 0;
-    padding: 12px 18px;
-    border-right: 1px solid var(--line);
-  }
-
-  .summary-stats b {
-    font-family: var(--serif);
-    font-size: 28px;
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: -.04em;
-  }
-
-  .summary-stats span {
-    margin-top: 3px;
-    color: var(--muted);
-    font-size: 9px;
-    letter-spacing: .06em;
-    white-space: nowrap;
-  }
-
-  .coverage-btn {
-    display: flex;
-    flex: 0 0 176px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 12px 18px;
+  .linkish {
+    padding: 0;
     border: 0;
-    border-left: 1px solid var(--line);
-    background: var(--surface);
-    text-align: left;
-    transition: background .15s ease;
+    background: none;
+    color: var(--blue);
+    font-size: inherit;
   }
 
-  .coverage-btn:hover { background: var(--surface-2); }
+  .linkish:hover { text-decoration: underline; text-underline-offset: 3px; }
 
-  .coverage-btn .coverage-label {
-    color: var(--muted);
-    font-size: 9px;
-    letter-spacing: .08em;
-  }
+  /* ---------- controls ---------- */
 
-  .coverage-btn .coverage-main {
-    display: flex;
-    align-items: baseline;
-    gap: 6px;
-    margin-top: 1px;
-  }
-
-  .coverage-btn b {
-    font-family: var(--serif);
-    font-size: 26px;
-    line-height: 1;
-  }
-
-  .coverage-btn em {
-    color: var(--green);
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 600;
-  }
-
-  .coverage-btn .coverage-arrow {
-    margin-top: 5px;
-    color: var(--green);
-    font-size: 9px;
-    letter-spacing: .04em;
-  }
-
-  .dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    display: inline-block;
-    flex: 0 0 auto;
-  }
-
-  /* ---------- filters ---------- */
-
-  .filters {
-    position: sticky;
-    top: 0;
-    z-index: 30;
-    margin: 0 -28px;
-    padding: 16px 28px 14px;
-    background: rgba(255, 255, 255, .96);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--line-strong);
-  }
-
-  .filter-row {
+  .controls {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 10px 12px;
+    gap: 10px 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
   }
 
   .search {
     position: relative;
-    flex: 1 1 260px;
-    max-width: 360px;
+    flex: 1 1 240px;
+    max-width: 330px;
   }
 
   .search svg {
     position: absolute;
-    left: 11px;
+    left: 0;
     top: 50%;
-    width: 14px;
-    height: 14px;
+    width: 13px;
+    height: 13px;
     transform: translateY(-50%);
-    color: var(--muted);
+    color: var(--faint);
     pointer-events: none;
   }
 
   .search input {
     width: 100%;
-    height: 36px;
-    padding: 0 12px 0 33px;
-    border: 1px solid var(--line-strong);
-    background: var(--surface);
+    height: 28px;
+    padding: 0 0 0 20px;
+    border: 0;
+    border-bottom: 1px solid var(--line-strong);
+    background: transparent;
     color: var(--ink);
-    border-radius: 2px;
     outline: none;
+    font-size: 12px;
   }
 
-  .search input:focus { border-color: var(--green); }
+  .search input:focus { border-bottom-color: var(--blue); }
+
+  .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .tab {
+    padding: 3px 7px 4px;
+    border: 0;
+    border-bottom: 1px solid transparent;
+    background: none;
+    color: var(--muted);
+    font-size: 11px;
+  }
+
+  .tab:hover { color: var(--ink); }
+
+  .tab.active {
+    color: var(--blue);
+    border-bottom-color: var(--blue);
+  }
+
+  .control-fields {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+  }
 
   .field {
     display: inline-flex;
     align-items: center;
-    gap: 7px;
-    height: 36px;
-    padding: 0 10px;
-    border: 1px solid var(--line-strong);
-    background: var(--surface);
-    border-radius: 2px;
+    gap: 5px;
     color: var(--muted);
-    font-size: 11px;
+    font-size: 10px;
     white-space: nowrap;
   }
 
   .field select,
   .field input[type="date"] {
+    max-width: 132px;
+    padding: 2px 1px;
     border: 0;
+    border-bottom: 1px solid var(--line-strong);
     background: transparent;
     color: var(--ink);
-    outline: none;
     font-size: 11px;
-    max-width: 126px;
+    outline: none;
   }
 
-  .field select { max-width: 170px; }
+  .field select { max-width: 150px; }
 
-  .field.date { padding-right: 6px; }
-  .field.date input[type="date"] { max-width: 118px; }
-  .field .sep { color: var(--muted-2); }
+  .field select:focus,
+  .field input[type="date"]:focus { border-bottom-color: var(--blue); }
 
-  .chips {
+  .check {
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    flex-wrap: wrap;
-  }
-
-  .chip {
-    height: 28px;
-    padding: 0 10px;
-    border: 1px solid transparent;
-    background: transparent;
     color: var(--muted);
-    font-size: 11px;
-    border-radius: 999px;
-    transition: all .15s ease;
+    font-size: 10px;
+    white-space: nowrap;
+    cursor: pointer;
   }
 
-  .chip:hover { color: var(--ink); background: var(--surface-2); }
-
-  .chip.active {
-    background: var(--green-deep);
-    border-color: var(--green-deep);
-    color: #f7fafc;
+  .check input {
+    width: 12px;
+    height: 12px;
+    margin: 0;
+    accent-color: var(--blue);
   }
 
   .quick {
     display: inline-flex;
-    align-items: center;
-    gap: 2px;
-    padding-left: 8px;
-    border-left: 1px solid var(--line);
+    gap: 8px;
+    color: var(--muted);
+    font-size: 10px;
   }
 
   .quick button {
-    height: 28px;
-    padding: 0 8px;
+    padding: 0;
     border: 0;
-    background: transparent;
+    background: none;
     color: var(--muted);
-    font-size: 11px;
-    border-radius: 2px;
+    font-size: 10px;
   }
 
-  .quick button:hover { color: var(--ink); background: var(--surface-2); }
+  .quick button:hover { color: var(--blue); }
 
-  .switches {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-left: auto;
-  }
-
-  .switch {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    color: var(--muted);
-    font-size: 11px;
-    cursor: pointer;
-    user-select: none;
-    white-space: nowrap;
-  }
-
-  .switch input {
-    appearance: none;
-    width: 28px;
-    height: 16px;
-    margin: 0;
-    border: 1px solid var(--line-strong);
-    background: var(--surface);
-    border-radius: 999px;
-    position: relative;
-    cursor: pointer;
-    transition: background .15s ease, border-color .15s ease;
-  }
-
-  .switch input::after {
-    content: "";
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    top: 2px;
-    left: 2px;
-    background: var(--muted-2);
-    border-radius: 50%;
-    transition: transform .15s ease, background .15s ease;
-  }
-
-  .switch input:checked {
-    background: var(--green);
-    border-color: var(--green);
-  }
-
-  .switch input:checked::after {
-    transform: translateX(12px);
-    background: #f7fafc;
-  }
-
-  .filter-meta {
+  .meta-line {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
-    margin-top: 10px;
+    gap: 14px;
+    padding: 8px 0 0;
     color: var(--muted);
-    font-size: 11px;
+    font-size: 10px;
   }
 
-  .filter-meta strong { color: var(--ink); font-weight: 600; }
+  .meta-line strong { color: var(--ink); font-weight: 600; }
 
   .meta-actions {
     display: inline-flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
     flex: 0 0 auto;
   }
 
-  .reset {
-    border: 0;
-    background: transparent;
-    color: var(--green);
-    font-size: 11px;
-    padding: 0;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
+  /* ---------- list ---------- */
 
-  /* ---------- table ---------- */
+  .list-section { padding-top: 22px; }
 
-  .jobs-section {
-    padding-top: 40px;
-    scroll-margin-top: 120px;
-  }
-
-  .section-head {
+  .list-head {
     display: flex;
-    align-items: flex-end;
+    align-items: baseline;
     justify-content: space-between;
-    gap: 20px;
-    padding-bottom: 14px;
-    border-bottom: 2px solid var(--ink);
+    gap: 14px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid var(--line-strong);
   }
 
-  .section-head h2 {
+  .list-head h2 {
     margin: 0;
-    font-family: var(--serif);
-    font-size: 28px;
-    font-weight: 700;
-    letter-spacing: 0;
-    line-height: 1.2;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: .01em;
   }
 
-  .section-head p {
-    margin: 0 0 2px;
+  .list-head p {
+    margin: 0;
     color: var(--muted);
-    font-size: 11px;
-    letter-spacing: .03em;
+    font-size: 10px;
   }
-
-  .mobile-only { display: none; }
 
   .table-wrap {
     width: 100%;
     overflow-x: auto;
-    border-bottom: 1px solid var(--line-strong);
   }
 
   table {
     width: 100%;
-    min-width: 1120px;
+    min-width: 900px;
     border-collapse: collapse;
     table-layout: fixed;
   }
 
   thead th {
-    padding: 12px 10px;
-    border-bottom: 1px solid var(--line-strong);
-    color: var(--muted);
+    padding: 9px 6px;
+    border-bottom: 1px solid var(--line);
+    color: var(--faint);
     font-size: 10px;
-    font-weight: 500;
-    letter-spacing: .1em;
+    font-weight: 400;
     text-align: left;
-    text-transform: uppercase;
     white-space: nowrap;
   }
 
-  thead th:first-child { padding-left: 4px; }
-  thead th:last-child { padding-right: 4px; text-align: right; }
+  thead th:first-child { padding-left: 2px; }
+  thead th:last-child { text-align: right; padding-right: 2px; }
 
-  tbody tr.job-row {
+  .col-inst { width: 25%; }
+  .col-dir { width: 24%; }
+  .col-type { width: 7%; }
+  .col-way { width: 10%; }
+  .col-start { width: 8%; }
+  .col-num { width: 6%; }
+  .col-deadline { width: 8%; }
+  .col-rel { width: 6%; }
+  .col-link { width: 6%; }
+
+  tbody tr.row {
     border-bottom: 1px solid var(--line);
-    transition: background .15s ease;
+    transition: background .12s ease;
   }
 
-  tbody tr.job-row:hover { background: #fafafa; }
-  tbody tr.job-row.is-open { background: var(--surface-2); }
+  tbody tr.row:hover { background: #fbfcfe; }
+  tbody tr.row.open { background: var(--blue-soft); }
 
   tbody td {
-    padding: 15px 10px;
+    padding: 13px 6px;
     vertical-align: top;
   }
 
-  tbody td:first-child { padding-left: 4px; }
-  tbody tr.job-row td:last-child { padding-right: 4px; text-align: right; }
+  tbody td:first-child { padding-left: 2px; }
+  tbody tr.row td:last-child { padding-right: 2px; text-align: right; }
 
-  .col-unit { width: 20%; }
-  .col-pos { width: 22%; }
-  .col-type { width: 7%; }
-  .col-emp { width: 10%; }
-  .col-date { width: 7%; }
-  .col-count { width: 6%; }
-  .col-deadline { width: 9.5%; }
-  .col-fit { width: 10.5%; }
-  .col-link { width: 8%; }
-
-  .unit-name {
-    font-size: 14px;
+  .inst {
+    font-size: 13px;
     font-weight: 600;
-    line-height: 1.45;
-    letter-spacing: -.01em;
-  }
-
-  .unit-detail {
-    margin-top: 3px;
-    color: var(--muted);
-    font-size: 10px;
     line-height: 1.5;
   }
 
-  .unit-source {
-    display: inline-block;
-    margin-top: 7px;
-    color: var(--muted-2);
-    font-size: 9px;
-    letter-spacing: .05em;
-    border-top: 1px solid var(--line);
-    padding-top: 4px;
+  .inst-sub {
+    margin-top: 2px;
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.55;
   }
 
-  .pos-title {
+  .dir {
     display: flex;
     align-items: flex-start;
-    gap: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 1.45;
+    gap: 5px;
+    font-size: 13px;
+    line-height: 1.5;
   }
 
-  .pos-title .text { flex: 1; }
+  .dir span { flex: 1; }
 
-  .expand {
-    width: 21px;
-    height: 21px;
+  .row-toggle {
+    width: 12px;
+    height: 18px;
     display: inline-grid;
     place-items: center;
     flex: 0 0 auto;
     margin-top: 1px;
-    border: 1px solid var(--line-strong);
+    padding: 0;
+    border: 0;
     background: transparent;
+    color: var(--faint);
+  }
+
+  .row-toggle:hover { color: var(--blue); }
+  .row-toggle svg { width: 8px; height: 8px; transition: transform .12s ease; }
+  .row-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+
+  .small {
     color: var(--muted);
-    border-radius: 2px;
-  }
-
-  .expand:hover { color: var(--ink); border-color: var(--ink); }
-  .expand svg { width: 11px; height: 11px; transition: transform .15s ease; }
-  .expand[aria-expanded="true"] svg { transform: rotate(180deg); }
-
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    margin-top: 8px;
-  }
-
-  .tag {
-    display: inline-block;
-    padding: 1px 6px;
-    border: 1px solid var(--line);
-    color: var(--muted);
-    font-size: 9px;
-    line-height: 1.7;
-    letter-spacing: .02em;
-    white-space: nowrap;
-  }
-
-  .tag.more { color: var(--muted-2); border-style: dashed; }
-
-  .type-pill {
-    display: inline-block;
-    padding: 2px 7px;
-    border: 1px solid transparent;
     font-size: 10px;
-    line-height: 1.7;
-    white-space: nowrap;
-    border-radius: 2px;
+    line-height: 1.6;
   }
 
-  .type-pill.univ { color: #1f5f99; background: #e8f1fb; border-color: #c9ddf2; }
-  .type-pill.voc { color: #2b6470; background: #e4f1f3; border-color: #c5dde1; }
-  .type-pill.soe { color: #244e78; background: #e3edf8; border-color: #c5d8ec; }
-  .type-pill.pub { color: #2c5d86; background: #e4eef7; border-color: #c6d3df; }
-  .type-pill.res { color: #4e5580; background: #eaecf7; border-color: #d4d7e9; }
-
-  .emp-text {
-    display: inline-block;
-    max-width: 100%;
-    color: #4b524b;
-    font-size: 10px;
-    line-height: 1.55;
-    white-space: normal;
-    word-break: break-word;
-  }
-
-  .date-main {
+  .date {
     font-family: var(--mono);
-    font-size: 12px;
-    font-weight: 600;
+    font-size: 11px;
     letter-spacing: -.02em;
     white-space: nowrap;
   }
 
   .date-sub {
-    margin-top: 2px;
-    color: var(--muted);
+    margin-top: 1px;
+    color: var(--faint);
     font-size: 9px;
-    letter-spacing: .03em;
     white-space: nowrap;
   }
 
-  .count-main {
-    font-family: var(--mono);
-    font-size: 14px;
-    font-weight: 600;
-    white-space: nowrap;
-  }
+  .closed { color: var(--faint); }
 
-  .deadline {
+  .rel {
     display: inline-block;
-    font-size: 11px;
-    font-weight: 600;
-    line-height: 1.5;
-    white-space: nowrap;
-  }
-
-  .deadline.normal { color: var(--ink); }
-  .deadline.soon { color: #2f6f9f; }
-  .deadline.urgent { color: var(--red); }
-  .deadline.closed { color: var(--muted-2); text-decoration: line-through; }
-
-  .deadline-sub {
-    margin-top: 2px;
+    width: 15px;
     color: var(--muted);
-    font-size: 9px;
-    white-space: nowrap;
-  }
-
-  .fit {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 2px 7px;
-    font-size: 10px;
-    line-height: 1.7;
-    white-space: nowrap;
-    border: 1px solid transparent;
-    border-radius: 2px;
-  }
-
-  .fit b {
     font-family: var(--mono);
     font-size: 10px;
-    font-weight: 700;
+    font-weight: 600;
   }
 
-  .fit-a { color: #f7fafc; background: var(--green); border-color: var(--green); }
-  .fit-b { color: var(--green); background: var(--green-soft); border-color: #c9ddf2; }
-  .fit-c { color: var(--muted); background: var(--gray-soft); border-color: var(--line); }
+  .rel-a { color: var(--blue); }
+  .rel-c { color: var(--faint); }
 
-  .link-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 4px;
-    color: var(--green);
-    font-size: 11px;
-    font-weight: 600;
+  .source-link {
+    color: var(--blue);
+    font-size: 10px;
     text-decoration: none;
     white-space: nowrap;
   }
 
-  .link-btn:hover { text-decoration: underline; text-underline-offset: 3px; }
-  .link-btn svg { width: 11px; height: 11px; }
+  .source-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 
-  /* ---------- detail rows ---------- */
+  /* ---------- detail ---------- */
 
-  tr.detail-row > td {
+  tr.detail > td {
     padding: 0;
-    background: var(--surface-2);
-    border-bottom: 1px solid var(--line-strong);
+    border-bottom: 1px solid var(--line);
+    background: #fbfcfe;
   }
 
-  .detail {
-    display: grid;
-    grid-template-columns: minmax(0, 1.55fr) minmax(260px, .7fr);
-    gap: 34px;
-    padding: 22px 26px 24px 34px;
-    border-left: 3px solid var(--green);
+  .detail-inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 28px;
+    width: 100%;
+    padding: 16px 18px 18px 24px;
+    border-left: 2px solid var(--blue);
     text-align: left;
   }
 
+  .detail-inner > div:first-child {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
   .detail-summary {
-    margin: 0 0 14px;
-    color: #343b34;
-    font-size: 13px;
+    margin: 0 0 12px;
+    color: #3d4b5a;
+    font-size: 11px;
     line-height: 1.8;
   }
 
-  .req-grid {
+  .facts {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0;
-    border-top: 1px solid var(--line);
-    border-left: 1px solid var(--line);
+    gap: 8px 18px;
+    margin: 0;
   }
 
-  .req {
-    padding: 9px 11px;
-    border-right: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-  }
+  .fact { min-width: 0; }
 
-  .req span {
-    display: block;
-    color: var(--muted);
+  .fact dt {
+    color: var(--faint);
     font-size: 9px;
-    letter-spacing: .08em;
-    text-transform: uppercase;
+    letter-spacing: .02em;
   }
 
-  .req b {
-    display: block;
-    margin-top: 2px;
+  .fact dd {
+    margin: 1px 0 0;
     color: var(--ink);
     font-size: 11px;
-    font-weight: 500;
     line-height: 1.6;
   }
 
-  .fit-note {
-    margin-top: 14px;
-    padding: 11px 13px;
-    border-left: 2px solid var(--green);
-    background: var(--surface);
-  }
-
-  .fit-note .label {
-    display: inline-block;
-    margin-bottom: 4px;
-    color: var(--green);
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: .1em;
-  }
-
-  .fit-note p {
-    margin: 0;
-    color: #414840;
-    font-size: 12px;
+  .note {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
+    color: #42505f;
+    font-size: 11px;
     line-height: 1.8;
   }
 
-  .group-box {
-    margin-top: 14px;
-    padding: 12px 13px;
-    border: 1px solid var(--line);
-    background: var(--surface);
+  .note b {
+    color: var(--blue);
+    font-weight: 600;
   }
 
-  .group-box .group-title {
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
-    color: var(--muted);
-    font-size: 10px;
-    letter-spacing: .04em;
-    margin-bottom: 8px;
-  }
-
-  .group-box .group-title b { color: var(--ink); font-weight: 600; }
-
-  .group-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5px 16px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .group-list li {
-    display: flex;
-    justify-content: space-between;
-    gap: 8px;
-    color: #414840;
-    font-size: 10px;
-    line-height: 1.6;
-  }
-
-  .group-list b { color: var(--ink); font-weight: 600; white-space: nowrap; }
-
-  .group-note {
-    margin: 8px 0 0;
+  .group {
+    margin-top: 10px;
     color: var(--muted);
     font-size: 10px;
     line-height: 1.7;
   }
 
+  .group b { color: var(--ink); font-weight: 600; }
+
   .detail-side {
+    flex: 0 0 230px;
+    min-width: 0;
     border-left: 1px solid var(--line);
-    padding-left: 22px;
+    padding-left: 18px;
   }
 
-  .side-item {
-    padding: 8px 0;
+  .side-row {
+    padding: 5px 0;
     border-bottom: 1px solid var(--line);
   }
 
-  .side-item span {
-    display: block;
-    color: var(--muted);
+  .side-row dt {
+    color: var(--faint);
     font-size: 9px;
-    letter-spacing: .08em;
-    text-transform: uppercase;
   }
 
-  .side-item b {
-    display: block;
-    margin-top: 2px;
-    font-size: 11px;
-    font-weight: 500;
+  .side-row dd {
+    margin: 1px 0 0;
+    font-size: 10px;
     line-height: 1.6;
   }
 
-  .detail-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    margin-top: 14px;
-    color: var(--green);
-    font-size: 11px;
-    font-weight: 600;
-    text-decoration: none;
+  /* ---------- mobile cards ---------- */
+
+  .mobile-list { display: none; }
+
+  .m-card {
+    padding: 14px 0 12px;
+    border-bottom: 1px solid var(--line);
   }
 
-  .detail-link:hover { text-decoration: underline; text-underline-offset: 3px; }
-  .detail-link svg { width: 11px; height: 11px; }
-
-  .empty {
-    padding: 64px 20px;
-    text-align: center;
-    color: var(--muted);
+  .m-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
   }
 
-  .empty b {
-    display: block;
-    margin-bottom: 6px;
-    color: var(--ink);
-    font-family: var(--serif);
-    font-size: 22px;
-  }
-
-  .empty p { margin: 0 0 16px; font-size: 12px; }
-
-  /* ---------- update log ---------- */
-
-  .log-section {
-    display: grid;
-    grid-template-columns: minmax(0, .62fr) minmax(0, 1fr);
-    gap: 60px;
-    margin-top: 54px;
-    padding-top: 34px;
-    border-top: 1px solid var(--line-strong);
-  }
-
-  .log-intro h2 {
-    margin: 0 0 10px;
-    font-family: var(--serif);
-    font-size: 28px;
-    line-height: 1.2;
-    letter-spacing: 0;
-  }
-
-  .log-intro p {
-    max-width: 360px;
-    margin: 0;
-    color: var(--muted);
-    font-size: 12px;
-    line-height: 1.8;
-  }
-
-  .timeline {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .timeline li {
-    display: grid;
-    grid-template-columns: 18px 1fr;
-    gap: 12px;
-    padding: 0 0 22px;
-    position: relative;
-  }
-
-  .timeline li:not(:last-child)::before {
-    content: "";
-    position: absolute;
-    left: 5px;
-    top: 14px;
-    bottom: 0;
-    width: 1px;
-    background: var(--line);
-  }
-
-  .timeline .dot {
-    width: 11px;
-    height: 11px;
-    margin-top: 4px;
-    border: 2px solid var(--paper);
-    outline: 1px solid var(--green);
-    background: var(--green);
-  }
-
-  .timeline li.next .dot { background: var(--paper); outline-color: var(--line-strong); }
-  .timeline li.next:not(:last-child)::before { background: transparent; }
-
-  .timeline b {
-    display: block;
+  .m-inst {
     font-size: 13px;
     font-weight: 600;
     line-height: 1.5;
   }
 
-  .timeline .meta {
-    margin-top: 2px;
+  .m-inst-sub {
+    margin-top: 1px;
     color: var(--muted);
     font-size: 10px;
-    letter-spacing: .04em;
   }
 
-  .timeline p {
-    margin: 5px 0 0;
-    color: #4b524b;
-    font-size: 11px;
+  .m-rel {
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .m-rel-a { color: var(--blue); }
+
+  .m-dir {
+    margin-top: 6px;
+    font-size: 12px;
+    line-height: 1.55;
+  }
+
+  .m-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 10px;
+  }
+
+  .m-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 7px;
+  }
+
+  .m-toggle {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--blue);
+    font-size: 10px;
+  }
+
+  .m-detail {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
+  }
+
+  .m-detail .facts { grid-template-columns: 1fr; gap: 7px; }
+  .m-detail .detail-side { border-left: 0; padding-left: 0; margin-top: 12px; }
+
+  /* ---------- log + footer ---------- */
+
+  .log {
+    margin-top: 26px;
+    border-top: 1px solid var(--line);
+  }
+
+  .log summary {
+    padding: 10px 0;
+    color: var(--muted);
+    font-size: 10px;
+    cursor: pointer;
+  }
+
+  .log-body {
+    padding: 0 0 8px 16px;
+    border-left: 1px solid var(--line);
+  }
+
+  .log-item { padding: 4px 0 10px; }
+  .log-item b { font-size: 11px; font-weight: 600; }
+  .log-item span { margin-left: 8px; color: var(--faint); font-size: 9px; }
+  .log-item p { margin: 2px 0 0; color: var(--muted); font-size: 10px; line-height: 1.7; }
+
+  .footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 24px;
+    margin-top: 22px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    color: var(--faint);
+    font-size: 9px;
     line-height: 1.7;
   }
 
-  .log-count {
-    display: inline-flex;
-    gap: 12px;
-    margin-top: 7px;
-    color: var(--muted);
-    font-size: 10px;
-  }
-
-  .log-count b { display: inline; color: var(--ink); font-family: var(--mono); font-size: 10px; }
-
-  /* ---------- footer ---------- */
-
-  .footer {
-    margin: 48px -28px -64px;
-    padding: 34px 28px 40px;
-    background: var(--green-deep);
-    color: #dce7f2;
-  }
-
-  .footer-inner {
-    max-width: var(--max);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1.2fr .8fr .8fr;
-    gap: 44px;
-  }
-
-  .footer h3 {
-    margin: 0 0 10px;
-    color: #f7fafc;
-    font-family: var(--serif);
-    font-size: 18px;
-    letter-spacing: .01em;
-  }
-
-  .footer p {
-    margin: 0;
-    color: #b8c9da;
-    font-size: 11px;
-    line-height: 1.8;
-  }
-
-  .footer b { color: #f7fafc; font-weight: 600; }
-
-  .footer .fine {
-    margin-top: 12px;
-    color: #8da6bd;
-    font-size: 10px;
-  }
-
-  /* ---------- dialog ---------- */
+  /* ---------- dialogs ---------- */
 
   dialog {
-    width: min(720px, calc(100vw - 40px));
-    max-height: min(82vh, 760px);
+    width: min(680px, calc(100vw - 32px));
+    max-height: min(82vh, 720px);
     padding: 0;
     border: 1px solid var(--line-strong);
-    background: var(--surface);
+    background: var(--bg);
     color: var(--ink);
-    border-radius: 2px;
   }
 
-  dialog::backdrop { background: rgba(12, 26, 40, .45); }
+  dialog::backdrop { background: rgba(20, 31, 44, .32); }
 
   .dialog-head {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    gap: 20px;
-    padding: 22px 24px 16px;
+    gap: 18px;
+    padding: 16px 18px 12px;
     border-bottom: 1px solid var(--line);
   }
 
   .dialog-head h2 {
     margin: 0;
-    font-family: var(--serif);
-    font-size: 24px;
-    line-height: 1.2;
+    font-size: 16px;
+    font-weight: 600;
   }
 
   .dialog-head p {
-    margin: 5px 0 0;
+    margin: 3px 0 0;
     color: var(--muted);
-    font-size: 11px;
+    font-size: 10px;
+    line-height: 1.6;
   }
 
   .dialog-close {
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 24px;
+    flex: 0 0 auto;
+    padding: 0;
     border: 1px solid var(--line-strong);
     background: transparent;
     color: var(--muted);
-    flex: 0 0 auto;
+    font-size: 14px;
+    line-height: 1;
   }
 
   .dialog-close:hover { color: var(--ink); border-color: var(--ink); }
 
   .dialog-body {
-    padding: 20px 24px 26px;
+    max-height: calc(82vh - 78px);
+    padding: 16px 18px 20px;
     overflow-y: auto;
-    max-height: calc(82vh - 90px);
   }
 
   .dialog-body h3 {
-    margin: 18px 0 7px;
-    font-size: 13px;
-    letter-spacing: .02em;
+    margin: 14px 0 5px;
+    font-size: 11px;
+    font-weight: 600;
   }
 
   .dialog-body h3:first-child { margin-top: 0; }
 
   .dialog-body p,
   .dialog-body li {
-    color: #444b44;
-    font-size: 12px;
+    color: #43505f;
+    font-size: 11px;
     line-height: 1.8;
   }
 
-  .dialog-body ul { margin: 0; padding-left: 18px; }
-  .dialog-body li { margin-bottom: 4px; }
+  .dialog-body ul { margin: 0; padding-left: 16px; }
 
   .dialog-body .rule {
-    margin: 14px 0;
-    padding: 12px 14px;
-    border-left: 2px solid var(--green);
-    background: var(--paper);
-    font-size: 11px;
-    color: #4b524b;
+    margin: 12px 0;
+    padding: 9px 11px;
+    border-left: 2px solid var(--blue);
+    background: #f7fafd;
+    color: #43505f;
+    font-size: 10px;
     line-height: 1.8;
   }
-
-  /* ---------- university coverage ---------- */
-
-  #coverage-dialog { width: min(920px, calc(100vw - 40px)); }
-
-  .coverage-body { padding-top: 16px; }
 
   .coverage-toolbar {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 10px;
-    padding-bottom: 12px;
+    padding-bottom: 10px;
     border-bottom: 1px solid var(--line);
   }
 
-  .coverage-search {
-    flex: 1 1 220px;
-    max-width: 300px;
-  }
+  .coverage-search { flex: 1 1 180px; max-width: 260px; }
 
   .coverage-search input {
-    height: 32px;
-    background: var(--paper);
+    height: 26px;
+    background: transparent;
   }
 
   .coverage-summary {
     display: flex;
     justify-content: space-between;
     gap: 12px;
-    padding: 11px 0;
+    padding: 8px 0;
     color: var(--muted);
-    font-size: 10px;
-    letter-spacing: .03em;
+    font-size: 9px;
   }
 
   .coverage-summary b { color: var(--ink); font-weight: 600; }
@@ -1205,7 +793,6 @@
   .uni-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0;
     border-top: 1px solid var(--line);
     border-left: 1px solid var(--line);
   }
@@ -1214,333 +801,260 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    gap: 8px;
-    min-height: 58px;
-    padding: 8px 10px;
+    gap: 6px;
+    min-height: 46px;
+    padding: 6px 8px;
     border-right: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
-    background: var(--surface);
   }
 
-  .uni-item.has-job { background: var(--green-soft); }
+  .uni-item.has-job { background: var(--blue-soft); }
 
-  .uni-name {
-    font-size: 11px;
-    font-weight: 500;
-    line-height: 1.45;
-    word-break: break-word;
-  }
+  .uni-name { font-size: 10px; line-height: 1.5; }
 
   .uni-meta {
     display: flex;
     flex-wrap: wrap;
-    gap: 3px;
-    margin-top: 5px;
-    color: var(--muted);
+    gap: 2px 5px;
+    margin-top: 3px;
+    color: var(--faint);
     font-size: 8px;
-    letter-spacing: .04em;
   }
 
-  .uni-meta span {
-    padding: 0 4px;
-    border: 1px solid var(--line);
-    line-height: 1.6;
-  }
-
-  .uni-job {
+  .uni-count {
     flex: 0 0 auto;
-    padding: 1px 5px;
-    background: var(--green);
-    color: #f7fafc;
+    color: var(--blue);
     font-family: var(--mono);
-    font-size: 9px;
-    line-height: 1.7;
+    font-size: 8px;
   }
 
   /* ---------- responsive ---------- */
 
-  @media (max-width: 1080px) {
-    .summary-lead { min-width: 210px; padding-right: 18px; }
-    .summary-stats > div { padding: 12px 14px; }
-    .coverage-btn { flex-basis: 150px; padding: 12px 14px; }
-    .detail { grid-template-columns: 1fr; gap: 18px; }
-    .detail-side { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 14px; }
-    .uni-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .footer-inner { grid-template-columns: 1fr 1fr; }
-  }
-
   @media (max-width: 820px) {
-    .page { padding: 0 16px 48px; }
-    .topbar { padding: 16px 0; }
-    .brand-sub { display: none; }
-    .issue-stamp { display: none; }
-    .summary-bar { flex-wrap: wrap; }
-    .summary-lead { flex: 1 1 100%; min-width: 0; padding: 12px 0; border-right: 0; border-bottom: 1px solid var(--line); }
-    .summary-stats { flex: 1 1 100%; }
-    .summary-stats > div { padding: 10px 12px; }
-    .summary-stats b { font-size: 24px; }
-    .coverage-btn { flex: 1 1 100%; flex-direction: row; align-items: center; gap: 10px; padding: 10px 0; border-left: 0; border-top: 1px solid var(--line); background: transparent; }
-    .coverage-btn .coverage-main { margin-top: 0; }
-    .coverage-btn .coverage-arrow { margin-top: 0; margin-left: auto; }
-    .filters { margin: 0 -16px; padding: 12px 16px; }
-    .filter-row { gap: 8px; }
-    .search { max-width: none; flex-basis: 100%; }
-    .switches { margin-left: 0; width: 100%; justify-content: space-between; }
-    .filter-meta { align-items: flex-start; }
-    .section-head { align-items: flex-start; flex-direction: column; gap: 6px; }
-    .section-head h2 { font-size: 24px; }
-    .mobile-only { display: inline; }
-    .log-section { grid-template-columns: 1fr; gap: 24px; }
-    .footer { margin: 36px -16px -48px; padding: 28px 16px 32px; }
-    .footer-inner { grid-template-columns: 1fr; gap: 22px; }
-    .detail { padding: 18px 16px 20px; }
-    .req-grid { grid-template-columns: 1fr; }
-    .group-list { grid-template-columns: 1fr; }
-    .uni-grid { grid-template-columns: 1fr; }
-    #coverage-dialog { width: calc(100vw - 24px); }
-    .coverage-toolbar { align-items: stretch; }
+    .shell { padding: 0 16px 36px; }
+    .masthead { align-items: flex-start; padding: 18px 0 14px; }
+    .wordmark h1 { font-size: 18px; }
+    .mast-actions { gap: 10px; }
+    .overview { padding: 11px 0; gap: 5px 16px; }
+    .overview-stats { gap: 4px 12px; }
+    .controls { gap: 9px 12px; padding: 11px 0; }
+    .search { flex-basis: 100%; max-width: none; }
+    .control-fields { gap: 8px 12px; width: 100%; }
+    .field select { max-width: 138px; }
+    .quick { display: none; }
+    .meta-line { padding-top: 7px; }
+    .list-section { padding-top: 16px; }
+    .list-head { align-items: flex-start; flex-direction: column; gap: 2px; }
+    .list-head h2 { font-size: 16px; }
+    .table-wrap { display: none; }
+    .mobile-list { display: block; }
+    .uni-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    dialog { width: calc(100vw - 24px); }
     .coverage-search { max-width: none; flex-basis: 100%; }
+    .detail-inner { flex-direction: column; gap: 14px; padding: 14px 12px 14px 16px; }
+    .detail-side { flex: 0 0 auto; width: 100%; border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 10px; }
   }
 
-  @media (max-width: 560px) {
-    .top-actions .btn span { display: none; }
-    .top-actions .btn { width: 34px; padding: 0; }
-    .summary-stats > div { padding: 9px 8px; }
-    .summary-stats b { font-size: 22px; }
-    .summary-stats span { font-size: 8px; }
+  @media (max-width: 520px) {
+    .mast-actions #top-date { display: none; }
+    .overview-period { width: 100%; }
+    .overview-stats { width: 100%; justify-content: space-between; gap: 6px; }
+    .tab { padding-left: 5px; padding-right: 5px; }
     .field { width: 100%; justify-content: space-between; }
-    .field select, .field input[type="date"] { max-width: 62%; }
-    .quick { border-left: 0; padding-left: 0; }
+    .field select, .field input[type="date"] { max-width: 64%; }
+    .check { font-size: 10px; }
+    .uni-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition: none !important; animation: none !important; }
   }
 
   @media print {
-    body { background: #fff; }
-    .page { max-width: none; padding: 0; }
-    .topbar, .filters, .log-section, .footer, .expand, .col-link { display: none !important; }
-    .summary-bar { border-bottom: 1px solid #999; }
-    .jobs-section { padding-top: 20px; }
+    .mast-actions, .controls, .meta-line, .log, .footer, .row-toggle, .col-link { display: none !important; }
+    .shell { max-width: none; padding: 0; }
+    .table-wrap { display: block !important; }
+    .mobile-list { display: none !important; }
     table { min-width: 0; font-size: 9px; }
-    tbody td { padding: 8px 5px; }
-    tr.detail-row { display: none; }
-    .tag { border-color: #ccc; }
+    tbody td { padding: 6px 4px; }
+    tr.detail { display: none; }
     a { text-decoration: none; color: #000; }
   }
 </style>
 </head>
 <body>
-<div class="page">
+<div class="shell">
 
-  <header class="topbar">
-    <div class="brand">
-      <div class="brand-mark">江</div>
-      <div>
-        <div class="brand-name">江城岗位雷达</div>
-        <div class="brand-sub">Wuhan campus &amp; SOE job radar</div>
-      </div>
+  <header class="masthead">
+    <div class="wordmark">
+      <h1>条条大路通罗马</h1>
+      <p>武汉 · 个人备忘</p>
     </div>
-    <div class="top-actions">
-      <div class="issue-stamp">
-        <b id="top-issue">第 01 期 · 试刊</b>
-        <span id="top-date">2026.11.12 · 数据截止</span>
-      </div>
-      <button class="btn" id="print-btn" type="button" title="打印当前筛选结果">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-        <span>打印</span>
-      </button>
-      <button class="btn btn-dark" id="csv-btn" type="button" title="导出当前筛选结果为 CSV">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v3h16v-3"/></svg>
-        <span>导出 CSV</span>
-      </button>
+    <div class="mast-actions">
+      <span id="top-date">2026.11.12</span>
+      <button class="plain-btn" id="print-btn" type="button">打印</button>
+      <button class="plain-btn" id="csv-btn" type="button">导出</button>
     </div>
   </header>
 
-  <section class="summary-bar" aria-label="本期速览">
-    <div class="summary-lead">
-      <span class="summary-eyebrow">武汉 · 高校 / 事业单位 / 国央企 · 社会招聘</span>
-      <strong id="summary-issue">第 01 期 · 试刊 <span id="summary-period">10.13 — 11.12</span></strong>
+  <section class="overview" aria-label="概览">
+    <div class="overview-period">
+      <b id="summary-issue">第 01 期 · 试刊</b>
+      <span id="summary-period">10.13—11.12</span>
     </div>
-    <div class="summary-stats">
-      <div><b id="stat-recommended">11</b><span>可投岗位</span></div>
-      <div><b id="stat-total">18</b><span>收录公告</span></div>
-      <div><b id="stat-open">17</b><span>仍在报名</span></div>
-      <div><b id="stat-sources">9</b><span>官方来源</span></div>
+    <div class="overview-stats">
+      <span><b id="stat-recommended">11</b> 条可看</span>
+      <span><b id="stat-total">18</b> 条记录</span>
+      <span><b id="stat-open">17</b> 条仍开放</span>
+      <button class="linkish" id="coverage-btn" type="button"><b id="stat-universities">83</b> 所高校</button>
     </div>
-    <button class="coverage-btn" id="coverage-btn" type="button" aria-haspopup="dialog">
-      <span class="coverage-label">高校监测库</span>
-      <span class="coverage-main"><b id="stat-universities">83</b><em>所</em><span class="coverage-arrow">查看 →</span></span>
-    </button>
   </section>
 
-  <section class="filters" aria-label="筛选条件">
-    <div class="filter-row">
-      <label class="search">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></svg>
-        <input id="search-input" type="search" placeholder="搜索单位、岗位、标签，如：行政 / 外贸 / 硕士" autocomplete="off">
+  <section class="controls" aria-label="筛选">
+    <label class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></svg>
+      <input id="search-input" type="search" placeholder="搜索机构、方向、标签" autocomplete="off">
+    </label>
+
+    <div class="tabs" id="type-chips" aria-label="类型">
+      <button class="tab active" type="button" data-type="">全部</button>
+      <button class="tab" type="button" data-type="高校">高校</button>
+      <button class="tab" type="button" data-type="职校">职校</button>
+      <button class="tab" type="button" data-type="国央企">企业</button>
+      <button class="tab" type="button" data-type="事业单位">事业</button>
+    </div>
+
+    <div class="control-fields">
+      <label class="field">来源
+        <select id="source-select" aria-label="来源"><option value="all">全部</option></select>
       </label>
-
-      <div class="chips" id="type-chips" aria-label="单位类型">
-        <button class="chip active" type="button" data-type="">全部</button>
-        <button class="chip" type="button" data-type="高校">高校</button>
-        <button class="chip" type="button" data-type="职校">职校</button>
-        <button class="chip" type="button" data-type="国央企">国央企</button>
-        <button class="chip" type="button" data-type="事业单位">事业单位</button>
-      </div>
-
-      <label class="field">
-        <span>来源</span>
-        <select id="source-select" aria-label="发布来源">
-          <option value="all">全部来源</option>
-        </select>
+      <label class="field">方式
+        <select id="employment-select" aria-label="方式"><option value="all">全部</option></select>
       </label>
-
-      <label class="field">
-        <span>用工</span>
-        <select id="employment-select" aria-label="用工方式">
-          <option value="all">全部用工</option>
-        </select>
+      <label class="field">从
+        <input id="date-from" type="date" aria-label="起始日期">
       </label>
-
-      <div class="field date">
-        <span>发布</span>
-        <input id="date-from" type="date" aria-label="发布日期起">
-        <span class="sep">—</span>
-        <input id="date-to" type="date" aria-label="发布日期止">
-      </div>
-
-      <div class="quick" aria-label="快捷日期">
+      <label class="field">到
+        <input id="date-to" type="date" aria-label="结束日期">
+      </label>
+      <div class="quick" aria-label="快捷时间">
         <button type="button" data-range="7">近 7 天</button>
         <button type="button" data-range="30">近 30 天</button>
         <button type="button" data-range="all">全部</button>
       </div>
-
-      <div class="switches">
-        <label class="switch"><input id="open-only" type="checkbox" checked> 只看未截止</label>
-        <label class="switch"><input id="show-c" type="checkbox"> 显示观察项</label>
-      </div>
-    </div>
-
-    <div class="filter-meta">
-      <span id="result-count" aria-live="polite">显示 11 条</span>
-      <span class="meta-actions">
-        <button class="reset" id="method-btn" type="button">筛选口径</button>
-        <button class="reset" id="reset-btn" type="button">清空筛选</button>
-      </span>
+      <label class="check"><input id="open-only" type="checkbox" checked> 只看仍开放</label>
+      <label class="check"><input id="show-c" type="checkbox"> 显示暂存</label>
     </div>
   </section>
 
-  <section class="jobs-section" id="jobs">
-    <div class="section-head">
-      <h2>岗位清单</h2>
-      <p id="sort-label">按发布日期从新到旧 · 点击岗位前的箭头展开要求<span class="mobile-only"> · 左右滑动看完整表格</span></p>
+  <div class="meta-line">
+    <span id="result-count" aria-live="polite">显示 11 条</span>
+    <span class="meta-actions">
+      <button class="linkish" id="method-btn" type="button">说明</button>
+      <button class="linkish" id="reset-btn" type="button">重置</button>
+    </span>
+  </div>
+
+  <main class="list-section" id="list">
+    <div class="list-head">
+      <h2>近期记录</h2>
+      <p id="sort-label">按日期排序</p>
     </div>
 
     <div class="table-wrap">
       <table>
         <thead>
           <tr>
-            <th class="col-unit">单位 / 来源</th>
-            <th class="col-pos">岗位</th>
+            <th class="col-inst">机构</th>
+            <th class="col-dir">方向</th>
             <th class="col-type">类型</th>
-            <th class="col-emp">用工</th>
-            <th class="col-date">开始</th>
-            <th class="col-count">人数</th>
+            <th class="col-way">方式</th>
+            <th class="col-start">开始</th>
+            <th class="col-num">人数</th>
             <th class="col-deadline">截止</th>
-            <th class="col-fit">匹配</th>
-            <th class="col-link">公告</th>
+            <th class="col-rel">相关</th>
+            <th class="col-link">原文</th>
           </tr>
         </thead>
         <tbody id="job-body"></tbody>
       </table>
     </div>
-  </section>
 
-  <section class="log-section">
-    <div class="log-intro">
-      <h2>更新记录</h2>
-      <p>每次只追加，不覆盖。旧公告会保留在列表里，方便回看哪些单位在持续招人、门槛有没有变化。</p>
-    </div>
-    <ol class="timeline" id="timeline"></ol>
-  </section>
+    <div class="mobile-list" id="mobile-list"></div>
+  </main>
+
+  <details class="log">
+    <summary>更新记录</summary>
+    <div class="log-body" id="timeline"></div>
+  </details>
 
   <footer class="footer">
-    <div class="footer-inner">
-      <div>
-        <h3>江城岗位雷达</h3>
-        <p>一份给“已经毕业、不赶校招”的人看的武汉岗位周报。数据来自高校人事处、国企官网、人社部门等公开渠道，链接直达原始公告。</p>
-        <p class="fine">建议投递前再次核对公告原文与截止时间。本页不构成任何求职承诺。</p>
-      </div>
-      <div>
-        <h3>更新节奏</h3>
-        <p><b>每周一 10:00</b> 更新上一周（周一至周日）新发布的公告；自动去重，保留历史。首期为近 30 天补录，之后只追加上一周。</p>
-      </div>
-      <div>
-        <h3>筛选口径</h3>
-        <p>武汉本地 · 直接用人单位 · 校内岗位 · 社会招聘 · 非应届可报 · 原始公告。劳务派遣岗位保留，但在“用工方式”中明确标注。</p>
-      </div>
-    </div>
+    <span>个人备忘 · 每周一整理一次 · 历史保留</span>
+    <span>信息来自公开渠道，以原文为准</span>
   </footer>
 </div>
 
 <dialog id="method-dialog" aria-labelledby="method-title">
   <div class="dialog-head">
     <div>
-      <h2 id="method-title">筛选口径</h2>
-      <p>这份周报收什么、不收什么，以及 A / B / C 怎么分。</p>
+      <h2 id="method-title">说明</h2>
+      <p>这份备忘记录什么、怎么分级。</p>
     </div>
     <button class="dialog-close" id="dialog-close" type="button" aria-label="关闭">×</button>
   </div>
   <div class="dialog-body">
-    <h3>纳入范围</h3>
+    <h3>记录范围</h3>
     <ul>
-      <li>工作地点在武汉，直接用人单位是高校、职校、事业单位、国央企或科研院所。</li>
-      <li>岗位在单位内部（学院、实验室、行政办公室、校医院、集团总部/子公司等），不是学校替外部企业挂的招聘或宣讲会。</li>
-      <li>面向社会公开招聘，已经毕业的非应届生可以报名；不要求“仅限 2027 届应届毕业生”。</li>
-      <li>原始招聘公告，报名窗口仍开放，或在上周刚刚发布；同一公告的多个岗位会拆成多行，方便比较。</li>
+      <li>武汉本地，机构直接发布的信息。</li>
+      <li>高校、职校、事业、企业等机构内部的方向，不是第三方转发或宣讲信息。</li>
+      <li>面向社会，已经毕业的人可以参与；不是只限某一届毕业生的项目。</li>
+      <li>原始信息仍在开放，或属于最近一轮更新；同一批的多个方向会拆开记录，方便比较。</li>
     </ul>
 
-    <h3>排除范围</h3>
+    <h3>不记录</h3>
     <ul>
-      <li>校园招聘、应届生专属、实习/见习、兼职、劳务外包和小时工。</li>
-      <li>学校就业网代其他单位发布的招聘、宣讲会、双选会信息。</li>
-      <li>拟录用公示、面试通知、笔试通知、体检通知、资格审查结果等“进行中”信息。</li>
-      <li>工作地点不在武汉的岗位；如果公司总部在武汉但岗位在外地，不纳入。</li>
+      <li>只面向在校生、实习兼职、外包和临时用工。</li>
+      <li>第三方渠道转发、宣讲、双选会。</li>
+      <li>结果公示、流程通知、体检通知等已经进入后续环节的信息。</li>
+      <li>工作地点不在武汉的方向。</li>
     </ul>
 
-    <h3>匹配分级</h3>
-    <p><b>A · 优先投递：</b>学历、专业、经验没有明显硬伤，岗位内容能和国际商务背景对上，值得先改简历。</p>
-    <p><b>B · 可尝试：</b>专业或学历对得上，但存在党员、年龄、工作经验、行业背景等硬条件；满足就投，不满足就当作需求观察。</p>
-    <p><b>C · 本期观察：</b>博士、医师资格、特定理工科专业等硬门槛，当前不适合投，但保留下来看单位需求和门槛变化。</p>
+    <h3>相关度</h3>
+    <p><b>A · 先看：</b>学历、专业、经历没有明显硬伤，内容和国际商务背景能对上，值得先了解。</p>
+    <p><b>B · 可看：</b>大方向对得上，但有党员、年龄、经历、行业背景等硬条件；满足就看看，不满足就当作背景资料。</p>
+    <p><b>C · 暂存：</b>博士、医师资格、特定理工科专业等硬门槛，当前不适合，但保留下来看趋势。</p>
 
     <div class="rule">
-      为什么保留劳务派遣：武汉高校的行政、教务、科研管理岗大量采用劳务派遣或校方招聘。它们仍然是校内岗位，只是用工方式不同。本页会明确标注“劳务派遣 / 校方招聘 / 劳动合同 / 国企聘用 / 事业编制”，不把派遣包装成编制。
+      有些方向采用派遣、合同或校方直接聘用。它们仍然是机构内部的方向，只是方式不同。页面会如实标注方式，不把派遣写成长期。
     </div>
 
     <h3>数据与更新</h3>
-    <p>首期（2026-11-12）为近 30 天补录，共 18 条；高校监测库覆盖教育部备案的 83 所武汉普通高校（公办/民办、本科/专科）。此后每周一 10:00 只追加上一周新发布的公告。每条记录保留原始链接、发布日期、报名开始与截止时间。若公告未写明某字段，会标注“未注明”，不做推测。</p>
+    <p>首期为 2026-11-12 的近 30 天补录，共 18 条；高校索引覆盖教育部备案的 83 所武汉普通高校（公办/民办、本科/专科）。此后每周一 10:00 只追加上一周的新内容，旧记录保留。未写明的地方标注“未注明”，不做推测。</p>
   </div>
 </dialog>
 
 <dialog id="coverage-dialog" aria-labelledby="coverage-title">
   <div class="dialog-head">
     <div>
-      <h2 id="coverage-title">武汉高校监测库</h2>
+      <h2 id="coverage-title">高校索引</h2>
       <p>教育部备案的 83 所普通高校：公办本科 25 · 民办本科 23 · 公办专科 27 · 民办专科 8。军校、成人高校未计入。</p>
     </div>
     <button class="dialog-close" id="coverage-close" type="button" aria-label="关闭">×</button>
   </div>
-  <div class="dialog-body coverage-body">
+  <div class="dialog-body">
     <div class="coverage-toolbar">
       <label class="search coverage-search">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></svg>
         <input id="uni-search" type="search" placeholder="搜索高校名称" autocomplete="off">
       </label>
-      <div class="chips" id="uni-chips">
-        <button class="chip active" type="button" data-uni-filter="all">全部</button>
-        <button class="chip" type="button" data-uni-filter="公办">公办</button>
-        <button class="chip" type="button" data-uni-filter="民办">民办</button>
-        <button class="chip" type="button" data-uni-filter="本科">本科</button>
-        <button class="chip" type="button" data-uni-filter="专科">专科</button>
-        <button class="chip" type="button" data-uni-filter="hasJob">本期有岗</button>
+      <div class="tabs" id="uni-chips">
+        <button class="tab active" type="button" data-uni-filter="all">全部</button>
+        <button class="tab" type="button" data-uni-filter="公办">公办</button>
+        <button class="tab" type="button" data-uni-filter="民办">民办</button>
+        <button class="tab" type="button" data-uni-filter="本科">本科</button>
+        <button class="tab" type="button" data-uni-filter="专科">专科</button>
+        <button class="tab" type="button" data-uni-filter="hasJob">有记录</button>
       </div>
     </div>
     <div class="coverage-summary" id="uni-summary"></div>
@@ -1555,9 +1069,9 @@
   "use strict";
 
   var DATA = window.WH_JOBS;
+  var body = document.getElementById("job-body");
   if (!DATA || !Array.isArray(DATA.jobs)) {
-    document.getElementById("job-body").innerHTML =
-      '<tr><td colspan="9"><div class="empty"><b>数据未加载</b><p>请确认 data/jobs.js 与 index.html 在同一目录下。</p></div></td></tr>';
+    body.innerHTML = '<tr><td colspan="9"><p class="small">数据未加载。</p></td></tr>';
     return;
   }
 
@@ -1567,17 +1081,12 @@
     return copy;
   });
 
-  var TYPE_CLASS = {
-    "高校": "univ",
-    "职校": "voc",
-    "国央企": "soe",
-    "事业单位": "pub",
-    "科研院所": "res"
-  };
-
+  var UNIS = (window.WH_UNIVERSITIES && window.WH_UNIVERSITIES.list) || [];
+  var TYPE_LABEL = { "高校": "高校", "职校": "职校", "国央企": "企业", "事业单位": "事业", "科研院所": "研究" };
+  var EMP_LABEL = { "长期": "长期", "企业聘用": "企业", "合同": "合同", "派遣": "派遣", "未注明": "未注明" };
   var WEEKDAYS = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
-  var DATE_MIN = DATA.meta.period_start || minDate(JOBS.map(function (j) { return j.publish_date; }));
-  var DATE_MAX = DATA.meta.period_end || maxDate(JOBS.map(function (j) { return j.publish_date; }));
+  var DATE_MIN = DATA.meta.period_start || "2026-01-01";
+  var DATE_MAX = DATA.meta.period_end || "2026-12-31";
 
   var state = {
     q: "",
@@ -1592,7 +1101,8 @@
   };
 
   var els = {
-    body: document.getElementById("job-body"),
+    body: body,
+    mobile: document.getElementById("mobile-list"),
     search: document.getElementById("search-input"),
     source: document.getElementById("source-select"),
     employment: document.getElementById("employment-select"),
@@ -1620,37 +1130,28 @@
     return new Date(now.getFullYear(), now.getMonth(), now.getDate());
   }
 
-  function daysBetween(a, b) {
-    return Math.round((a.getTime() - b.getTime()) / 86400000);
-  }
-
   function daysLeft(job) {
     if (job.rolling) return 9999;
     var d = parseDate(job.deadline);
     if (!d) return 9999;
-    return daysBetween(d, startOfToday());
+    return Math.round((d.getTime() - startOfToday().getTime()) / 86400000);
   }
 
-  function isOpen(job) {
-    if (job.rolling) return true;
-    return daysLeft(job) >= 0;
-  }
+  function isOpen(job) { return job.rolling || daysLeft(job) >= 0; }
 
   function fmtMD(value) {
     var d = parseDate(value);
-    if (!d) return value || "未注明";
-    return pad(d.getMonth() + 1) + "." + pad(d.getDate());
+    return d ? pad(d.getMonth() + 1) + "." + pad(d.getDate()) : (value || "未注明");
+  }
+
+  function fmtLong(value) {
+    var d = parseDate(value);
+    return d ? d.getFullYear() + "." + pad(d.getMonth() + 1) + "." + pad(d.getDate()) : (value || "未注明");
   }
 
   function weekDay(value) {
     var d = parseDate(value);
     return d ? WEEKDAYS[d.getDay()] : "";
-  }
-
-  function fmtLong(value) {
-    var d = parseDate(value);
-    if (!d) return value || "未注明";
-    return d.getFullYear() + "." + pad(d.getMonth() + 1) + "." + pad(d.getDate());
   }
 
   function esc(value) {
@@ -1662,45 +1163,23 @@
       .replace(/'/g, "&#39;");
   }
 
-  function minDate(values) {
-    return values.filter(Boolean).sort()[0] || "2026-01-01";
-  }
+  function typeLabel(type) { return TYPE_LABEL[type] || type; }
+  function empLabel(emp) { return EMP_LABEL[emp] || emp; }
 
-  function maxDate(values) {
-    var sorted = values.filter(Boolean).sort();
-    return sorted[sorted.length - 1] || "2026-12-31";
-  }
-
-  function fitClass(fit) {
-    return fit === "A" ? "fit-a" : fit === "B" ? "fit-b" : "fit-c";
+  function relLabel(fit) {
+    return fit === "A" ? "A · 先看" : fit === "B" ? "B · 可看" : "C · 暂存";
   }
 
   function deadlineView(job) {
-    if (job.rolling) {
-      return { cls: "normal", text: "招满即止", sub: "滚动招聘", title: "招满即止" };
-    }
+    if (job.rolling) return { text: "滚动", sub: "以实际为准", cls: "" };
     var d = daysLeft(job);
-    var sub = job.deadline_time && job.deadline_time !== "未注明" ? job.deadline_time : weekDay(job.deadline);
-    if (d < 0) {
-      return { cls: "closed", text: "已截止", sub: fmtLong(job.deadline), title: fmtLong(job.deadline) };
-    }
-    if (d === 0) {
-      return { cls: "urgent", text: "今天截止", sub: sub, title: fmtLong(job.deadline) };
-    }
-    if (d <= 3) {
-      return { cls: "urgent", text: "剩 " + d + " 天", sub: sub, title: fmtLong(job.deadline) };
-    }
-    if (d <= 7) {
-      return { cls: "soon", text: "剩 " + d + " 天", sub: sub, title: fmtLong(job.deadline) };
-    }
-    return { cls: "normal", text: "剩 " + d + " 天", sub: sub, title: fmtLong(job.deadline) };
+    if (d < 0) return { text: fmtMD(job.deadline), sub: "已结束", cls: "closed" };
+    return { text: fmtMD(job.deadline), sub: weekDay(job.deadline), cls: d <= 3 ? "near" : "" };
   }
 
   function sourceOptions() {
     var counts = {};
-    JOBS.forEach(function (job) {
-      counts[job.source] = (counts[job.source] || 0) + 1;
-    });
+    JOBS.forEach(function (job) { counts[job.source] = (counts[job.source] || 0) + 1; });
     return Object.keys(counts).sort(function (a, b) {
       return counts[b] - counts[a] || a.localeCompare(b, "zh-CN");
     });
@@ -1708,13 +1187,9 @@
 
   function employmentOptions() {
     var counts = {};
-    JOBS.forEach(function (job) {
-      counts[job.employment] = (counts[job.employment] || 0) + 1;
-    });
+    JOBS.forEach(function (job) { counts[job.employment] = (counts[job.employment] || 0) + 1; });
     return Object.keys(counts).sort(function (a, b) {
       return counts[b] - counts[a] || a.localeCompare(b, "zh-CN");
-    }).map(function (name) {
-      return { name: name, count: counts[name] };
     });
   }
 
@@ -1728,106 +1203,33 @@
   }
 
   function renderEmploymentOptions() {
-    employmentOptions().forEach(function (item) {
+    employmentOptions().forEach(function (emp) {
       var option = document.createElement("option");
-      option.value = item.name;
-      option.textContent = item.name + " (" + item.count + ")";
+      option.value = emp;
+      option.textContent = empLabel(emp);
       els.employment.appendChild(option);
     });
   }
 
-  function renderSnapshot() {
-    var recommended = JOBS.filter(function (j) { return j.fit !== "C"; }).length;
+  function renderOverview() {
+    var recommended = JOBS.filter(function (job) { return job.fit !== "C"; }).length;
     var open = JOBS.filter(isOpen).length;
-    var sources = new Set(JOBS.map(function (j) { return j.source; })).size;
-    var universityTotal = window.WH_UNIVERSITIES && window.WH_UNIVERSITIES.total
-      ? window.WH_UNIVERSITIES.total
-      : 83;
+    var total = UNIS.length || 83;
 
     document.getElementById("stat-recommended").textContent = recommended;
     document.getElementById("stat-total").textContent = JOBS.length;
     document.getElementById("stat-open").textContent = open;
-    document.getElementById("stat-sources").textContent = sources;
-    document.getElementById("stat-universities").textContent = universityTotal;
-    document.getElementById("top-issue").textContent = DATA.meta.issue_label || ("第 " + pad(DATA.meta.issue) + " 期");
-    document.getElementById("top-date").textContent = fmtLong(DATA.meta.generated_at) + " · 数据截止";
-
-    var period = fmtMD(DATA.meta.period_start) + " — " + fmtMD(DATA.meta.period_end);
-    var issueLabel = DATA.meta.issue_label || ("第 " + pad(DATA.meta.issue) + " 期");
-    document.getElementById("summary-issue").innerHTML =
-      esc(issueLabel) + ' <span id="summary-period">' + esc(period) + "</span>";
+    document.getElementById("stat-universities").textContent = total;
+    document.getElementById("top-date").textContent = fmtLong(DATA.meta.generated_at);
+    document.getElementById("summary-issue").textContent = DATA.meta.issue_label || ("第 " + pad(DATA.meta.issue) + " 期");
+    document.getElementById("summary-period").textContent = fmtMD(DATA.meta.period_start) + "—" + fmtMD(DATA.meta.period_end);
   }
 
-  function renderTimeline() {
-    var issues = (DATA.issues || []).slice().sort(function (a, b) {
-      return b.id - a.id;
-    });
-    var html = issues.map(function (issue) {
-      return '<li>' +
-        '<span class="dot"></span>' +
-        '<div>' +
-          '<b>' + esc(issue.label) + '</b>' +
-          '<div class="meta">' + esc(issue.date) + ' · ' + esc(issue.period) + '</div>' +
-          '<p>' + esc(issue.note) + '</p>' +
-          '<div class="log-count"><span>新增 <b>' + issue.added + '</b></span><span>推荐 <b>' + issue.recommended + '</b></span></div>' +
-        '</div>' +
-      '</li>';
-    }).join("");
-
-    html += '<li class="next">' +
-      '<span class="dot"></span>' +
-      '<div>' +
-        '<b>下一期 · 2026-11-16 10:00</b>' +
-        '<div class="meta">追加上一周 · 11.09 — 11.15</div>' +
-        '<p>只追加新发布的公告，按链接 + 岗位去重；已收录岗位不重复计数。历史记录保留在本页。</p>' +
-      '</div>' +
-    '</li>';
-
-    els.timeline.innerHTML = html;
-  }
-
-  var UNIS = (window.WH_UNIVERSITIES && window.WH_UNIVERSITIES.list) || [];
-  var uniState = { q: "", filter: "all" };
-
-  function renderCoverage() {
-    var counts = {};
-    JOBS.forEach(function (job) {
-      counts[job.unit] = (counts[job.unit] || 0) + 1;
-    });
-
-    var withJob = UNIS.filter(function (uni) { return counts[uni.name]; }).length;
-    var uniJobs = UNIS.reduce(function (sum, uni) { return sum + (counts[uni.name] || 0); }, 0);
-
-    var list = UNIS.filter(function (uni) {
-      if (uniState.q && uni.name.toLowerCase().indexOf(uniState.q.toLowerCase()) === -1) return false;
-      if (uniState.filter === "hasJob") return !!counts[uni.name];
-      if (uniState.filter !== "all" && uni.nature !== uniState.filter && uni.level !== uniState.filter) return false;
-      return true;
-    }).sort(function (a, b) {
-      var diff = (counts[b.name] || 0) - (counts[a.name] || 0);
-      return diff || a.name.localeCompare(b.name, "zh-CN");
-    });
-
-    var summary = document.getElementById("uni-summary");
-    if (summary) {
-      summary.innerHTML = "<span>共 <b>" + UNIS.length + "</b> 所 · 本期有岗 <b>" + withJob + "</b> 所 · 岗位 <b>" + uniJobs + "</b> 条</span><span>当前显示 <b>" + list.length + "</b> 所</span>";
-    }
-
-    var grid = document.getElementById("uni-grid");
-    if (!grid) return;
-    if (!list.length) {
-      grid.innerHTML = '<div class="empty" style="grid-column:1/-1"><b>没有匹配的高校</b><p>试试换一个关键词，或切回“全部”。</p></div>';
-      return;
-    }
-
-    grid.innerHTML = list.map(function (uni) {
-      var count = counts[uni.name] || 0;
-      return '<div class="uni-item' + (count ? " has-job" : "") + '">' +
-        '<div><div class="uni-name">' + esc(uni.name) + '</div>' +
-          '<div class="uni-meta"><span>' + esc(uni.nature) + '</span><span>' + esc(uni.level) + '</span>' + (uni.note ? '<span>' + esc(uni.note) + '</span>' : '') + '</div>' +
-        '</div>' +
-        (count ? '<span class="uni-job">' + count + ' 岗</span>' : '') +
-      '</div>';
+  function renderLog() {
+    var issues = (DATA.issues || []).slice().sort(function (a, b) { return b.id - a.id; });
+    els.timeline.innerHTML = issues.map(function (issue) {
+      return '<div class="log-item"><b>' + esc(issue.label) + '</b><span>' + esc(issue.date) + '</span>' +
+        '<p>' + esc(issue.note) + '</p></div>';
     }).join("");
   }
 
@@ -1841,165 +1243,118 @@
     if (state.dateTo && job.publish_date > state.dateTo) return false;
 
     if (state.q) {
-      var haystack = [
-        job.unit,
-        job.unit_detail,
-        job.position,
-        job.type,
-        job.type_detail,
-        job.source,
-        job.major,
-        job.education,
-        job.experience,
-        job.employment,
-        job.location,
-        (job.tags || []).join(" ")
+      var text = [
+        job.unit, job.unit_detail, job.position, job.type, job.type_detail,
+        job.source, job.major, job.education, job.experience, job.employment,
+        job.location, (job.tags || []).join(" ")
       ].join(" ").toLowerCase();
-      var needle = state.q.toLowerCase();
-      if (haystack.indexOf(needle) === -1) return false;
+      if (text.indexOf(state.q.toLowerCase()) === -1) return false;
     }
     return true;
-  }
-
-  function deadlineValue(job) {
-    return job.rolling ? "9999-12-31" : job.deadline;
   }
 
   function sortJobs(list) {
     return list.sort(function (a, b) {
       if (state.sort === "deadline_asc") {
-        return deadlineValue(a).localeCompare(deadlineValue(b)) || b.publish_date.localeCompare(a.publish_date);
+        return (a.rolling ? "9999" : a.deadline).localeCompare(b.rolling ? "9999" : b.deadline) ||
+          b.publish_date.localeCompare(a.publish_date);
       }
       if (state.sort === "headcount_desc") {
         return (b.headcount - a.headcount) || b.publish_date.localeCompare(a.publish_date);
       }
-      return (b.publish_date.localeCompare(a.publish_date)) || deadlineValue(a).localeCompare(deadlineValue(b));
+      return b.publish_date.localeCompare(a.publish_date) ||
+        (a.rolling ? "9999" : a.deadline).localeCompare(b.rolling ? "9999" : b.deadline);
     });
   }
 
-  function filteredJobs() {
-    return sortJobs(JOBS.filter(matches));
+  function filteredJobs() { return sortJobs(JOBS.filter(matches)); }
+
+  function factsHtml(job) {
+    return '<dl class="facts">' +
+      '<div class="fact"><dt>学历</dt><dd>' + esc(job.education) + '</dd></div>' +
+      '<div class="fact"><dt>经历</dt><dd>' + esc(job.experience) + '</dd></div>' +
+      '<div class="fact"><dt>专业</dt><dd>' + esc(job.major) + '</dd></div>' +
+      '<div class="fact"><dt>年龄 / 面貌</dt><dd>' + esc(job.age) + ' · ' + esc(job.party) + '</dd></div>' +
+    '</dl>';
   }
 
-  function tagsHtml(tags) {
-    var list = tags || [];
-    var shown = list.slice(0, 3).map(function (tag) {
-      return '<span class="tag">' + esc(tag) + '</span>';
-    }).join("");
-    if (list.length > 3) {
-      shown += '<span class="tag more">+' + (list.length - 3) + '</span>';
+  function detailInner(job) {
+    var group = "";
+    if (job.group_positions && job.group_positions.length) {
+      group = '<div class="group"><b>同批其他方向</b>：' +
+        job.group_positions.map(function (item) {
+          return esc(item.name) + ' ' + esc(item.headcount) + ' 人';
+        }).join('、') +
+        '。' + esc(job.group_note || "") + '</div>';
     }
-    return shown;
+
+    return '<p class="detail-summary">' + esc(job.summary) + '</p>' +
+      factsHtml(job) +
+      '<div class="note"><b>' + esc(relLabel(job.fit)) + '</b>　' + esc(job.fit_reason) + '</div>' +
+      group;
+  }
+
+  function sideInner(job) {
+    var dl = deadlineView(job);
+    return '<dl class="side-row"><dt>方式</dt><dd>' + esc(empLabel(job.employment)) + '</dd></dl>' +
+      '<dl class="side-row"><dt>地点</dt><dd>' + esc(job.location) + '</dd></dl>' +
+      '<dl class="side-row"><dt>来源</dt><dd>' + esc(job.source) + '</dd></dl>' +
+      '<dl class="side-row"><dt>截止</dt><dd>' + (job.rolling ? "滚动" : fmtLong(job.deadline) + (job.deadline_time && job.deadline_time !== "未注明" ? " " + esc(job.deadline_time) : "")) + '</dd></dl>' +
+      '<dl class="side-row"><dt>原文</dt><dd><a class="source-link" href="' + esc(job.announcement_url) + '" target="_blank" rel="noopener noreferrer">打开</a></dd></dl>';
   }
 
   function rowHtml(job) {
-    var typeClass = TYPE_CLASS[job.type] || "res";
     var dl = deadlineView(job);
-    var fit = job.fit || "C";
-    var fitLabel = job.fit_label || (fit === "A" ? "优先投递" : fit === "B" ? "可尝试" : "观察");
-
-    return '<tr class="job-row" data-id="' + esc(job.id) + '">' +
-      '<td>' +
-        '<div class="unit-name">' + esc(job.unit) + '</div>' +
-        '<div class="unit-detail">' + esc(job.unit_detail) + '</div>' +
-        '<span class="unit-source">' + esc(job.source) + '</span>' +
-      '</td>' +
-      '<td>' +
-        '<div class="pos-title">' +
-          '<span class="text">' + esc(job.position) + '</span>' +
-          '<button class="expand" type="button" data-toggle="' + esc(job.id) + '" aria-expanded="false" aria-label="展开岗位要求">' +
-            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>' +
-          '</button>' +
-        '</div>' +
-        '<div class="tags">' + tagsHtml(job.tags) + '</div>' +
-      '</td>' +
-      '<td><span class="type-pill ' + typeClass + '">' + esc(job.type) + '</span></td>' +
-      '<td><span class="emp-text">' + esc(job.employment) + '</span></td>' +
-      '<td><div class="date-main">' + fmtMD(job.start_date) + '</div><div class="date-sub">' + weekDay(job.start_date) + ' · 发布</div></td>' +
-      '<td><div class="count-main">' + esc(job.headcount_label || (job.headcount + " 人")) + '</div></td>' +
-      '<td><div class="deadline ' + dl.cls + '" title="' + esc(dl.title) + '">' + esc(dl.text) + '</div><div class="deadline-sub">' + esc(dl.sub) + '</div></td>' +
-      '<td><span class="fit ' + fitClass(fit) + '"><b>' + esc(fit) + '</b> ' + esc(fitLabel) + '</span></td>' +
-      '<td><a class="link-btn" href="' + esc(job.announcement_url) + '" target="_blank" rel="noopener noreferrer">公告' +
-        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 4h6v6M20 4 10 14M20 14v6H4V4h6"/></svg>' +
-      '</a></td>' +
-    '</tr>';
+    return '<tr class="row" data-id="' + esc(job.id) + '">' +
+      '<td><div class="inst">' + esc(job.unit) + '</div><div class="inst-sub">' + esc(job.unit_detail) + '</div></td>' +
+      '<td><div class="dir">' +
+        '<button class="row-toggle" type="button" data-toggle="' + esc(job.id) + '" aria-expanded="false" aria-label="展开">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>' +
+        '</button><span>' + esc(job.position) + '</span></div></td>' +
+      '<td><span class="small">' + esc(typeLabel(job.type)) + '</span></td>' +
+      '<td><span class="small">' + esc(empLabel(job.employment)) + '</span></td>' +
+      '<td><div class="date">' + fmtMD(job.start_date) + '</div></td>' +
+      '<td><span class="small">' + esc(job.headcount_label || (job.headcount + " 人")) + '</span></td>' +
+      '<td><div class="date ' + dl.cls + '">' + esc(dl.text) + '</div><div class="date-sub">' + esc(dl.sub) + '</div></td>' +
+      '<td><span class="rel rel-' + esc(job.fit.toLowerCase()) + '">' + esc(job.fit) + '</span></td>' +
+      '<td><a class="source-link" href="' + esc(job.announcement_url) + '" target="_blank" rel="noopener noreferrer">原文</a></td>' +
+    '</tr>' +
+    '<tr class="detail" data-detail="' + esc(job.id) + '" hidden><td colspan="9">' +
+      '<div class="detail-inner"><div>' + detailInner(job) + '</div><div class="detail-side">' + sideInner(job) + '</div></div>' +
+    '</td></tr>';
   }
 
-  function groupHtml(job) {
-    if (!job.group_positions || !job.group_positions.length) return "";
-    var items = job.group_positions.map(function (item) {
-      return '<li><span>' + esc(item.name) + '</span><b>' + esc(item.headcount) + ' 人</b></li>';
-    }).join("");
-    return '<div class="group-box">' +
-      '<div class="group-title"><span>同一公告 · 武汉地区岗位</span><b>合计 ' + esc(job.group_total || "") + ' 人</b></div>' +
-      '<ul class="group-list">' + items + '</ul>' +
-      '<p class="group-note">' + esc(job.group_note || "") + '</p>' +
-    '</div>';
-  }
-
-  function detailHtml(job) {
-    var fit = job.fit || "C";
-    var fitLabel = job.fit_label || (fit === "A" ? "优先投递" : fit === "B" ? "可尝试" : "观察");
+  function mobileCardHtml(job) {
     var dl = deadlineView(job);
-
-    return '<tr class="detail-row" data-detail="' + esc(job.id) + '" hidden>' +
-      '<td colspan="9">' +
-        '<div class="detail">' +
-          '<div>' +
-            '<p class="detail-summary">' + esc(job.summary) + '</p>' +
-            '<div class="req-grid">' +
-              '<div class="req"><span>学历</span><b>' + esc(job.education) + '</b></div>' +
-              '<div class="req"><span>经验</span><b>' + esc(job.experience) + '</b></div>' +
-              '<div class="req"><span>专业</span><b>' + esc(job.major) + '</b></div>' +
-              '<div class="req"><span>年龄 / 政治面貌</span><b>' + esc(job.age) + ' · ' + esc(job.party) + '</b></div>' +
-            '</div>' +
-            '<div class="fit-note">' +
-              '<span class="label">匹配判断 · ' + esc(fit) + ' ' + esc(fitLabel) + '</span>' +
-              '<p>' + esc(job.fit_reason) + '</p>' +
-            '</div>' +
-            groupHtml(job) +
-          '</div>' +
-          '<aside class="detail-side">' +
-            '<div class="side-item"><span>用工方式</span><b>' + esc(job.employment) + '</b></div>' +
-            '<div class="side-item"><span>工作地点</span><b>' + esc(job.location) + '</b></div>' +
-            '<div class="side-item"><span>发布来源</span><b>' + esc(job.source) + '</b></div>' +
-            '<div class="side-item"><span>报名截止</span><b>' + (job.rolling ? "招满即止 · 滚动招聘" : fmtLong(job.deadline) + (job.deadline_time && job.deadline_time !== "未注明" ? " " + esc(job.deadline_time) : "") + ' · ' + esc(dl.text)) + '</b></div>' +
-            '<a class="detail-link" href="' + esc(job.announcement_url) + '" target="_blank" rel="noopener noreferrer">查看原始公告' +
-              '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 4h6v6M20 4 10 14M20 14v6H4V4h6"/></svg>' +
-            '</a>' +
-          '</aside>' +
-        '</div>' +
-      '</td>' +
-    '</tr>';
+    return '<article class="m-card" data-mobile-id="' + esc(job.id) + '">' +
+      '<div class="m-top"><div><div class="m-inst">' + esc(job.unit) + '</div>' +
+        '<div class="m-inst-sub">' + esc(job.unit_detail) + '</div></div>' +
+        '<span class="m-rel ' + (job.fit === "A" ? "m-rel-a" : "") + '">' + esc(job.fit) + '</span></div>' +
+      '<div class="m-dir">' + esc(job.position) + '</div>' +
+      '<div class="m-meta"><span>' + esc(typeLabel(job.type)) + '</span><span>' + esc(empLabel(job.employment)) + '</span>' +
+        '<span>' + fmtMD(job.start_date) + ' 开始</span><span>' + (job.rolling ? "滚动" : fmtMD(job.deadline) + ' 截止') + '</span>' +
+        '<span>' + esc(job.headcount_label || (job.headcount + " 人")) + '</span></div>' +
+      '<div class="m-actions"><button class="m-toggle" type="button" data-mobile-toggle="' + esc(job.id) + '">展开</button>' +
+        '<a class="source-link" href="' + esc(job.announcement_url) + '" target="_blank" rel="noopener noreferrer">原文</a></div>' +
+      '<div class="m-detail" data-mobile-detail="' + esc(job.id) + '" hidden>' +
+        detailInner(job) + '<div class="detail-side">' + sideInner(job) + '</div></div>' +
+    '</article>';
   }
 
   function renderTable() {
     var list = filteredJobs();
-    var hiddenC = JOBS.filter(function (j) { return j.fit === "C"; }).length;
-    var html = "";
+    var hiddenC = JOBS.filter(function (job) { return job.fit === "C"; }).length;
 
-    if (!list.length) {
-      html = '<tr><td colspan="9"><div class="empty">' +
-        '<b>没有符合条件的岗位</b>' +
-        '<p>试试关闭“只看未截止”、放宽发布日期，或勾选“显示观察项”。</p>' +
-        '<button class="btn" type="button" id="empty-reset">清空筛选</button>' +
-      '</div></td></tr>';
-    } else {
-      list.forEach(function (job) {
-        html += rowHtml(job) + detailHtml(job);
-      });
-    }
+    body.innerHTML = list.length ? list.map(rowHtml).join("") :
+      '<tr><td colspan="9"><p class="small" style="padding:24px 0">没有符合条件的记录。可以关闭“只看仍开放”，或放宽日期。</p></td></tr>';
 
-    els.body.innerHTML = html;
+    els.mobile.innerHTML = list.length ? list.map(mobileCardHtml).join("") :
+      '<p class="small" style="padding:20px 0">没有符合条件的记录。</p>';
 
-    var countText = "显示 <strong>" + list.length + "</strong> 条 · 共 " + JOBS.length + " 条收录";
-    if (!state.showC && hiddenC) {
-      countText += " · " + hiddenC + " 条观察项已隐藏";
-    }
-    if (state.openOnly) {
-      countText += " · 只看未截止";
-    }
-    els.count.innerHTML = countText;
+    var text = "显示 <strong>" + list.length + "</strong> 条 · 共 " + JOBS.length + " 条记录";
+    if (!state.showC && hiddenC) text += " · " + hiddenC + " 条暂存已隐藏";
+    if (state.openOnly) text += " · 只看仍开放";
+    els.count.innerHTML = text;
   }
 
   function syncControls() {
@@ -2010,17 +1365,15 @@
     els.dateTo.value = state.dateTo;
     els.openOnly.checked = state.openOnly;
     els.showC.checked = state.showC;
-
-    Array.prototype.forEach.call(els.typeChips.querySelectorAll(".chip"), function (chip) {
-      var type = chip.getAttribute("data-type");
-      var active = type === "" ? state.types.size === 0 : state.types.has(type);
-      chip.classList.toggle("active", active);
+    Array.prototype.forEach.call(els.typeChips.querySelectorAll(".tab"), function (tab) {
+      var type = tab.getAttribute("data-type");
+      tab.classList.toggle("active", type === "" ? state.types.size === 0 : state.types.has(type));
     });
   }
 
   function renderAll() {
     syncControls();
-    renderSnapshot();
+    renderOverview();
     renderTable();
   }
 
@@ -2051,164 +1404,148 @@
   }
 
   function toggleDetail(id) {
-    var detail = els.body.querySelector('[data-detail="' + id + '"]');
-    var button = els.body.querySelector('[data-toggle="' + id + '"]');
+    var detail = body.querySelector('[data-detail="' + id + '"]');
+    var button = body.querySelector('[data-toggle="' + id + '"]');
     if (!detail) return;
-    var isHidden = detail.hasAttribute("hidden");
-    if (isHidden) {
-      detail.removeAttribute("hidden");
-    } else {
-      detail.setAttribute("hidden", "");
-    }
-    if (button) button.setAttribute("aria-expanded", isHidden ? "true" : "false");
-    var row = els.body.querySelector('.job-row[data-id="' + id + '"]');
-    if (row) row.classList.toggle("is-open", isHidden);
+    var hidden = detail.hasAttribute("hidden");
+    if (hidden) detail.removeAttribute("hidden");
+    else detail.setAttribute("hidden", "");
+    if (button) button.setAttribute("aria-expanded", hidden ? "true" : "false");
+    var row = body.querySelector('.row[data-id="' + id + '"]');
+    if (row) row.classList.toggle("open", hidden);
   }
 
   function exportCsv() {
     var list = filteredJobs();
-    var header = ["单位", "岗位", "单位类型", "用工方式", "开始时间", "报名截止", "招聘人数", "匹配", "学历", "经验", "来源", "公告链接"];
+    var header = ["机构", "方向", "类型", "方式", "开始", "截止", "人数", "相关", "学历", "经历", "来源", "原文"];
     var rows = [header].concat(list.map(function (job) {
       return [
-        job.unit,
-        job.position,
-        job.type,
-        job.employment,
-        job.start_date,
-        job.deadline + (job.deadline_time && job.deadline_time !== "未注明" ? " " + job.deadline_time : ""),
-        job.headcount_label || (job.headcount + " 人"),
-        job.fit + " · " + (job.fit_label || ""),
-        job.education,
-        job.experience,
-        job.source,
-        job.announcement_url
+        job.unit, job.position, typeLabel(job.type), empLabel(job.employment),
+        job.start_date, job.rolling ? "滚动" : job.deadline,
+        job.headcount_label || (job.headcount + " 人"), job.fit,
+        job.education, job.experience, job.source, job.announcement_url
       ];
     }));
-
     var csv = "\uFEFF" + rows.map(function (row) {
       return row.map(function (cell) {
-        var value = String(cell == null ? "" : cell);
-        return '"' + value.replace(/"/g, '""') + '"';
+        return '"' + String(cell == null ? "" : cell).replace(/"/g, '""') + '"';
       }).join(",");
     }).join("\r\n");
-
     var blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
     var url = URL.createObjectURL(blob);
     var a = document.createElement("a");
     a.href = url;
-    a.download = "wuhan-jobs-" + DATA.meta.generated_at + ".csv";
+    a.download = "notes-" + DATA.meta.generated_at + ".csv";
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     setTimeout(function () { URL.revokeObjectURL(url); }, 500);
   }
 
+  function renderCoverage() {
+    var counts = {};
+    JOBS.forEach(function (job) { counts[job.unit] = (counts[job.unit] || 0) + 1; });
+    var withJob = UNIS.filter(function (uni) { return counts[uni.name]; }).length;
+    var uniJobs = UNIS.reduce(function (sum, uni) { return sum + (counts[uni.name] || 0); }, 0);
+    var list = UNIS.filter(function (uni) {
+      if (uniState.q && uni.name.toLowerCase().indexOf(uniState.q.toLowerCase()) === -1) return false;
+      if (uniState.filter === "hasJob") return !!counts[uni.name];
+      if (uniState.filter !== "all" && uni.nature !== uniState.filter && uni.level !== uniState.filter) return false;
+      return true;
+    }).sort(function (a, b) {
+      return (counts[b.name] || 0) - (counts[a.name] || 0) || a.name.localeCompare(b.name, "zh-CN");
+    });
+
+    document.getElementById("uni-summary").innerHTML =
+      "<span>共 <b>" + UNIS.length + "</b> 所 · 有记录 <b>" + withJob + "</b> 所</span><span>当前显示 <b>" + list.length + "</b> 所</span>";
+
+    document.getElementById("uni-grid").innerHTML = list.map(function (uni) {
+      var count = counts[uni.name] || 0;
+      return '<div class="uni-item' + (count ? " has-job" : "") + '">' +
+        '<div><div class="uni-name">' + esc(uni.name) + '</div><div class="uni-meta"><span>' + esc(uni.nature) + '</span><span>' + esc(uni.level) + '</span></div></div>' +
+        (count ? '<span class="uni-count">' + count + '</span>' : '') +
+      '</div>';
+    }).join("");
+  }
+
+  var uniState = { q: "", filter: "all" };
+
   function bindEvents() {
-    var searchTimer = null;
+    var timer = null;
     els.search.addEventListener("input", function (event) {
-      clearTimeout(searchTimer);
+      clearTimeout(timer);
       var value = event.target.value.trim();
-      searchTimer = setTimeout(function () {
-        state.q = value;
-        renderTable();
-      }, 120);
+      timer = setTimeout(function () { state.q = value; renderTable(); }, 120);
     });
 
-    els.source.addEventListener("change", function (event) {
-      state.source = event.target.value;
-      renderTable();
-    });
-
+    els.source.addEventListener("change", function (event) { state.source = event.target.value; renderTable(); });
     els.employment.addEventListener("change", function (event) {
       state.employment = event.target.value;
       if (state.employment !== "all") state.showC = true;
       syncControls();
       renderTable();
     });
-
-    els.dateFrom.addEventListener("change", function (event) {
-      state.dateFrom = event.target.value || DATE_MIN;
-      renderTable();
-    });
-
-    els.dateTo.addEventListener("change", function (event) {
-      state.dateTo = event.target.value || DATE_MAX;
-      renderTable();
-    });
-
-    els.openOnly.addEventListener("change", function (event) {
-      state.openOnly = event.target.checked;
-      renderTable();
-    });
-
-    els.showC.addEventListener("change", function (event) {
-      state.showC = event.target.checked;
-      renderTable();
-    });
+    els.dateFrom.addEventListener("change", function (event) { state.dateFrom = event.target.value || DATE_MIN; renderTable(); });
+    els.dateTo.addEventListener("change", function (event) { state.dateTo = event.target.value || DATE_MAX; renderTable(); });
+    els.openOnly.addEventListener("change", function (event) { state.openOnly = event.target.checked; renderTable(); });
+    els.showC.addEventListener("change", function (event) { state.showC = event.target.checked; renderTable(); });
 
     els.typeChips.addEventListener("click", function (event) {
-      var chip = event.target.closest(".chip");
-      if (!chip) return;
-      var type = chip.getAttribute("data-type");
-      if (type === "") {
-        state.types.clear();
-      } else if (state.types.has(type)) {
-        state.types.delete(type);
-      } else {
-        state.types.add(type);
-      }
+      var tab = event.target.closest(".tab");
+      if (!tab) return;
+      var type = tab.getAttribute("data-type");
+      if (type === "") state.types.clear();
+      else if (state.types.has(type)) state.types.delete(type);
+      else state.types.add(type);
       syncControls();
       renderTable();
     });
 
     document.querySelectorAll(".quick button").forEach(function (button) {
-      button.addEventListener("click", function () {
-        setRange(button.getAttribute("data-range"));
-      });
+      button.addEventListener("click", function () { setRange(button.getAttribute("data-range")); });
     });
 
     els.reset.addEventListener("click", resetFilters);
+    document.getElementById("csv-btn").addEventListener("click", exportCsv);
+    document.getElementById("print-btn").addEventListener("click", function () { window.print(); });
 
-    els.body.addEventListener("click", function (event) {
+    body.addEventListener("click", function (event) {
       if (event.target.closest("a")) return;
       var toggle = event.target.closest("[data-toggle]");
-      if (toggle) {
-        toggleDetail(toggle.getAttribute("data-toggle"));
-        return;
-      }
-      if (event.target.id === "empty-reset") {
-        resetFilters();
-        return;
-      }
-      var row = event.target.closest(".job-row");
+      if (toggle) { toggleDetail(toggle.getAttribute("data-toggle")); return; }
+      var row = event.target.closest(".row");
       if (row) toggleDetail(row.getAttribute("data-id"));
     });
 
-    els.body.addEventListener("keydown", function (event) {
+    body.addEventListener("keydown", function (event) {
       if (event.key !== "Enter" && event.key !== " ") return;
-      var row = event.target.closest(".job-row");
+      var row = event.target.closest(".row");
       if (!row || event.target.closest("a")) return;
       event.preventDefault();
       toggleDetail(row.getAttribute("data-id"));
     });
 
-    document.getElementById("csv-btn").addEventListener("click", exportCsv);
-    document.getElementById("print-btn").addEventListener("click", function () { window.print(); });
+    els.mobile.addEventListener("click", function (event) {
+      var button = event.target.closest("[data-mobile-toggle]");
+      if (!button) return;
+      var id = button.getAttribute("data-mobile-toggle");
+      var panel = els.mobile.querySelector('[data-mobile-detail="' + id + '"]');
+      if (!panel) return;
+      var hidden = panel.hasAttribute("hidden");
+      if (hidden) panel.removeAttribute("hidden");
+      else panel.setAttribute("hidden", "");
+      button.textContent = hidden ? "收起" : "展开";
+    });
 
     var dialog = document.getElementById("method-dialog");
-    var methodBtn = document.getElementById("method-btn");
-    if (methodBtn) {
-      methodBtn.addEventListener("click", function () {
-        if (typeof dialog.showModal === "function") dialog.showModal();
-        else dialog.setAttribute("open", "");
-      });
-    }
-    if (document.getElementById("dialog-close")) {
-      document.getElementById("dialog-close").addEventListener("click", function () {
-        if (typeof dialog.close === "function") dialog.close();
-        else dialog.removeAttribute("open");
-      });
-    }
+    document.getElementById("method-btn").addEventListener("click", function () {
+      if (typeof dialog.showModal === "function") dialog.showModal();
+      else dialog.setAttribute("open", "");
+    });
+    document.getElementById("dialog-close").addEventListener("click", function () {
+      if (typeof dialog.close === "function") dialog.close();
+      else dialog.removeAttribute("open");
+    });
     dialog.addEventListener("click", function (event) {
       if (event.target === dialog) {
         if (typeof dialog.close === "function") dialog.close();
@@ -2217,20 +1554,15 @@
     });
 
     var coverageDialog = document.getElementById("coverage-dialog");
-    var coverageBtn = document.getElementById("coverage-btn");
-    if (coverageBtn) {
-      coverageBtn.addEventListener("click", function () {
-        renderCoverage();
-        if (typeof coverageDialog.showModal === "function") coverageDialog.showModal();
-        else coverageDialog.setAttribute("open", "");
-      });
-    }
-    if (document.getElementById("coverage-close")) {
-      document.getElementById("coverage-close").addEventListener("click", function () {
-        if (typeof coverageDialog.close === "function") coverageDialog.close();
-        else coverageDialog.removeAttribute("open");
-      });
-    }
+    document.getElementById("coverage-btn").addEventListener("click", function () {
+      renderCoverage();
+      if (typeof coverageDialog.showModal === "function") coverageDialog.showModal();
+      else coverageDialog.setAttribute("open", "");
+    });
+    document.getElementById("coverage-close").addEventListener("click", function () {
+      if (typeof coverageDialog.close === "function") coverageDialog.close();
+      else coverageDialog.removeAttribute("open");
+    });
     coverageDialog.addEventListener("click", function (event) {
       if (event.target === coverageDialog) {
         if (typeof coverageDialog.close === "function") coverageDialog.close();
@@ -2238,29 +1570,24 @@
       }
     });
 
-    var uniSearch = document.getElementById("uni-search");
-    if (uniSearch) {
-      uniSearch.addEventListener("input", function (event) {
-        uniState.q = event.target.value.trim();
-        renderCoverage();
+    document.getElementById("uni-search").addEventListener("input", function (event) {
+      uniState.q = event.target.value.trim();
+      renderCoverage();
+    });
+    document.getElementById("uni-chips").addEventListener("click", function (event) {
+      var tab = event.target.closest(".tab");
+      if (!tab) return;
+      uniState.filter = tab.getAttribute("data-uni-filter");
+      Array.prototype.forEach.call(document.querySelectorAll("#uni-chips .tab"), function (item) {
+        item.classList.toggle("active", item === tab);
       });
-    }
-    var uniChips = document.getElementById("uni-chips");
-    if (uniChips) {
-      uniChips.addEventListener("click", function (event) {
-        var chip = event.target.closest(".chip");
-        if (!chip) return;
-        uniState.filter = chip.getAttribute("data-uni-filter");
-        Array.prototype.forEach.call(uniChips.querySelectorAll(".chip"), function (item) {
-          item.classList.toggle("active", item === chip);
-        });
-        renderCoverage();
-      });
-    }
+      renderCoverage();
+    });
+
     document.getElementById("sort-label").addEventListener("click", function () {
       state.sort = state.sort === "publish_desc" ? "deadline_asc" : state.sort === "deadline_asc" ? "headcount_desc" : "publish_desc";
-      var label = state.sort === "publish_desc" ? "按发布日期从新到旧" : state.sort === "deadline_asc" ? "按截止时间从近到远" : "按招聘人数从多到少";
-      document.getElementById("sort-label").innerHTML = label + " · 点击岗位前的箭头展开要求" + '<span class="mobile-only"> · 左右滑动看完整表格</span>';
+      var label = state.sort === "publish_desc" ? "按日期排序" : state.sort === "deadline_asc" ? "按截止排序" : "按人数排序";
+      document.getElementById("sort-label").textContent = label;
       renderTable();
     });
   }
@@ -2268,24 +1595,22 @@
   renderSourceOptions();
   renderEmploymentOptions();
   syncControls();
-  renderSnapshot();
+  renderOverview();
   renderTable();
-  renderTimeline();
+  renderLog();
   bindEvents();
 
   function openFromHash() {
     if (location.hash === "#universities") {
-      var coverageTrigger = document.getElementById("coverage-btn");
-      if (coverageTrigger) coverageTrigger.click();
+      document.getElementById("coverage-btn").click();
       return;
     }
-    var match = (location.hash || "").match(/^#job-(.+)$/);
+    var match = (location.hash || "").match(/^#item-(.+)$/);
     if (!match) return;
     var id = decodeURIComponent(match[1]);
-    var detail = els.body.querySelector('[data-detail="' + id + '"]');
-    if (!detail) return;
-    if (detail.hasAttribute("hidden")) toggleDetail(id);
-    detail.scrollIntoView({ behavior: "smooth", block: "center" });
+    var detail = body.querySelector('[data-detail="' + id + '"]');
+    if (detail && detail.hasAttribute("hidden")) toggleDetail(id);
+    if (detail) detail.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
   window.addEventListener("hashchange", openFromHash);
