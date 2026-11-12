@@ -1,0 +1,15 @@
+﻿tmp/
+dist/
+.surge-token
+.mail.json
+.tmpmail
+.tmpmail.json
+remote.png
+online.png
+mobile-remote.png
+.DS_Store
+Thumbs.db
+
+*.png
+.agents/
+skills-lock.json
