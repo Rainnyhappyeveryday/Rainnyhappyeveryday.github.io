@@ -200,7 +200,7 @@
   tbody td:first-child { padding-left: 16px; }
   tbody td:last-child { padding-right: 16px; text-align: right; }
   tbody tr:hover { background: #fafcff; }
-  .col-org { width: 25%; }
+  .col-org { width: 23%; }
   .col-dir { width: 20%; }
   .col-type { width: 7%; }
   .col-way { width: 9%; }
@@ -208,7 +208,10 @@
   .col-num { width: 6%; }
   .col-end { width: 9%; }
   .col-rel { width: 7%; }
-  .col-op { width: 9%; }
+  .col-op { width: 11%; }
+  .op-links { display: flex; align-items: center; justify-content: flex-end; gap: 9px; }
+  .link-external { color: var(--text-2); }
+  .link-external:hover { color: var(--primary); }
   .org { font-size: 13px; font-weight: 500; line-height: 1.45; }
   .org-sub { margin-top: 2px; color: var(--muted); font-size: 10px; line-height: 1.45; }
   .dir { font-size: 12px; color: var(--text); line-height: 1.5; }
@@ -251,6 +254,8 @@
   .m-meta { display: flex; flex-wrap: wrap; gap: 4px 10px; margin-top: 5px; color: var(--text-2); font-size: 10px; }
   .m-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 9px; }
   .m-foot .date { font-size: 10px; }
+  .m-actions { display: flex; align-items: center; gap: 12px; }
+  .m-actions a { color: var(--text-2); font-size: 11px; text-decoration: none; }
   .m-open { padding: 0; border: 0; background: transparent; color: var(--primary); font-size: 11px; }
 
   /* ---------- drawer ---------- */
@@ -276,6 +281,8 @@
   }
   .drawer-head h2 { margin: 0; font-size: 16px; font-weight: 600; }
   .drawer-head p { margin: 2px 0 0; color: var(--muted); font-size: 11px; }
+  .drawer-head-actions { display: flex; align-items: center; gap: 8px; }
+  .btn-sm { height: 28px; padding: 0 10px; font-size: 12px; }
   .drawer-close { width: 28px; height: 28px; border: 0; background: transparent; color: var(--muted); font-size: 18px; }
   .drawer-body { padding: 18px 20px; overflow-y: auto; }
   .drawer-title { font-size: 18px; font-weight: 600; line-height: 1.4; }
@@ -369,11 +376,7 @@
       <div class="logo-text"><b>条条大路通罗马</b><span>武汉 · 个人备忘</span></div>
     </div>
     <nav class="nav" aria-label="导航">
-      <a class="nav-item active" href="#">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-        概览
-      </a>
-      <a class="nav-item" href="#list">
+      <a class="nav-item active" href="#list">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
         记录
       </a>
@@ -391,7 +394,7 @@
 
   <div class="main">
     <header class="topbar">
-      <div class="crumb">概览 <span>/</span> <b>近期记录</b></div>
+      <div class="crumb">武汉 <span>/</span> <b>近期记录</b></div>
       <div class="top-actions">
         <span class="date">2026.11.12</span>
         <button class="icon-btn" id="print-btn" type="button" title="打印" aria-label="打印">
@@ -419,7 +422,7 @@
         </div>
       </div>
 
-      <section class="kpis" aria-label="概览">
+      <section class="kpis" aria-label="数据概览">
         <div class="kpi">
           <div><div class="kpi-label">可看记录</div><div class="kpi-num" id="stat-recommended">11</div><div class="kpi-sub">A / B 类</div></div>
           <div class="kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5"/></svg></div>
@@ -527,10 +530,12 @@
 <aside class="drawer" id="drawer" aria-hidden="true">
   <div class="drawer-head">
     <div><h2>记录详情</h2><p>公开信息备忘</p></div>
-    <button class="drawer-close" id="drawer-close" type="button" aria-label="关闭">×</button>
+    <div class="drawer-head-actions">
+      <a class="btn btn-primary btn-sm" id="drawer-link" href="#" target="_blank" rel="noopener noreferrer">查看原文 ↗</a>
+      <button class="drawer-close" id="drawer-close" type="button" aria-label="关闭">×</button>
+    </div>
   </div>
   <div class="drawer-body" id="drawer-body"></div>
-  <div class="drawer-foot"><a class="btn btn-primary" id="drawer-link" href="#" target="_blank" rel="noopener noreferrer">打开原文</a></div>
 </aside>
 
 <dialog id="method-dialog" aria-labelledby="method-title">
@@ -774,7 +779,7 @@
       '<td><span class="muted">' + esc(job.headcount_label || (job.headcount + " 人")) + '</span></td>' +
       '<td><span class="tag ' + deadlineClass(job) + '">' + esc(deadlineText(job)) + '</span></td>' +
       '<td><span class="tag ' + fitClass(job.fit) + '">' + esc(job.fit) + '</span></td>' +
-      '<td><button class="link-btn" type="button" data-view="' + esc(job.id) + '">查看</button></td>' +
+      '<td><div class="op-links"><button class="link-btn" type="button" data-view="' + esc(job.id) + '">查看</button><a class="link-btn link-external" href="' + esc(job.announcement_url) + '" target="_blank" rel="noopener noreferrer">原文</a></div></td>' +
     '</tr>';
   }
 
@@ -783,7 +788,7 @@
       '<div class="m-top"><div><div class="m-org">' + esc(job.unit) + '</div><div class="m-sub">' + esc(job.unit_detail) + '</div></div><span class="tag ' + fitClass(job.fit) + '">' + esc(job.fit) + '</span></div>' +
       '<div class="m-dir">' + esc(job.position) + '</div>' +
       '<div class="m-meta"><span>' + esc(typeLabel(job.type)) + '</span><span>' + esc(empLabel(job.employment)) + '</span><span>' + esc(job.headcount_label || (job.headcount + " 人")) + '</span><span>' + esc(deadlineText(job)) + ' 截止</span></div>' +
-      '<div class="m-foot"><span class="date">' + fmtMD(job.start_date) + ' 开始</span><button class="m-open" type="button" data-view="' + esc(job.id) + '">查看详情</button></div>' +
+      '<div class="m-foot"><span class="date">' + fmtMD(job.start_date) + ' 开始</span><div class="m-actions"><a href="' + esc(job.announcement_url) + '" target="_blank" rel="noopener noreferrer">原文</a><button class="m-open" type="button" data-view="' + esc(job.id) + '">查看详情</button></div></div>' +
     '</article>';
   }
 
